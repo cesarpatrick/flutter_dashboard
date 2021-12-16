@@ -1,4 +1,4 @@
-import 'package:admin/models/RecentFile.dart';
+import 'package:admin/models/Job.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -42,10 +42,8 @@ class RecentJobs extends StatelessWidget {
                   label: Text("Reported"),
                 ),
               ],
-              rows: List.generate(
-                  demoRecentFiles.length,
-                  (index) =>
-                      recentFileDataRow(demoRecentFiles[index], context)),
+              rows: List.generate(demoJobs.length,
+                  (index) => recentFileDataRow(demoJobs[index], context)),
             ),
           ),
         ],
@@ -636,16 +634,24 @@ showSimpleModalDialog(context) {
       });
 }
 
-DataRow recentFileDataRow(RecentFile fileInfo, BuildContext context) {
+DataRow recentFileDataRow(Job jobInfo, BuildContext context) {
   return DataRow(
     cells: [
       DataCell(
         Row(
           children: [
-            Icon(Icons.car_repair, color: Colors.lightBlue),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Icon(Icons.car_repair, color: Colors.black),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text(fileInfo.title!),
+              child: Text(jobInfo.truck!),
             ),
           ],
         ),
@@ -653,8 +659,8 @@ DataRow recentFileDataRow(RecentFile fileInfo, BuildContext context) {
           showSimpleModalDialog(context);
         },
       ),
-      DataCell(Text(fileInfo.date!)),
-      DataCell(Text(fileInfo.size!)),
+      DataCell(Text(jobInfo.date!)),
+      DataCell(Text(jobInfo.driver!)),
     ],
   );
 }

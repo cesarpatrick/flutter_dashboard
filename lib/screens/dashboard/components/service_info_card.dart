@@ -3,17 +3,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
-class ServiceInfoCard extends StatelessWidget {
-  const ServiceInfoCard({
+class JobInfoCard extends StatelessWidget {
+  const JobInfoCard({
     Key? key,
     required this.title,
     required this.svgSrc,
-    required this.amountOfFiles,
-    required this.numOfFiles,
+    required this.amountOfJobsDone,
+    required this.numOfJobs,
   }) : super(key: key);
 
-  final String title, svgSrc, amountOfFiles;
-  final int numOfFiles;
+  final String title, svgSrc, amountOfJobsDone;
+  final int numOfJobs;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class ServiceInfoCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    "$numOfFiles Services Done",
+                    "$numOfJobs Services Done",
                     style: Theme.of(context)
                         .textTheme
                         .caption!
@@ -55,7 +55,7 @@ class ServiceInfoCard extends StatelessWidget {
               ),
             ),
           ),
-          Text(amountOfFiles)
+          Text(amountOfJobsDone)
         ],
       ),
     );

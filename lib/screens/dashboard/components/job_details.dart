@@ -29,29 +29,29 @@ class JobDetails extends StatelessWidget {
           ),
           SizedBox(height: defaultPadding),
           Chart(),
-          ServiceInfoCard(
+          JobInfoCard(
             svgSrc: "assets/icons/Documents.svg",
             title: "Planned Service",
-            amountOfFiles: "13",
-            numOfFiles: 13,
+            amountOfJobsDone: "13",
+            numOfJobs: 13,
           ),
-          ServiceInfoCard(
+          JobInfoCard(
             svgSrc: "assets/icons/media.svg",
             title: "Unplanned Service",
-            amountOfFiles: "20",
-            numOfFiles: 20,
+            amountOfJobsDone: "20",
+            numOfJobs: 20,
           ),
-          ServiceInfoCard(
+          JobInfoCard(
             svgSrc: "assets/icons/folder.svg",
             title: "Early Life Failure",
-            amountOfFiles: "25",
-            numOfFiles: 25,
+            amountOfJobsDone: "25",
+            numOfJobs: 25,
           ),
-          ServiceInfoCard(
+          JobInfoCard(
             svgSrc: "assets/icons/unknown.svg",
             title: "Accident",
-            amountOfFiles: "2",
-            numOfFiles: 2,
+            amountOfJobsDone: "2",
+            numOfJobs: 2,
           ),
         ],
       ),
