@@ -4,9 +4,6 @@
 
 import 'dart:convert';
 
-List<TruckIssue> truckIssueFromJson(String str) =>
-    List<TruckIssue>.from(json.decode(str).map((x) => TruckIssue.fromJson(x)));
-
 String truckIssueToJson(List<TruckIssue> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -45,7 +42,7 @@ class TruckIssue {
   DateTime? workshopEtc;
   Key key;
 
-  factory TruckIssue.fromJson(Map<String, dynamic> json) => TruckIssue(
+  factory TruckIssue.fromMap(Map<String, dynamic> json) => TruckIssue(
         id: json["id"],
         truckId: json["truckId"],
         webuserId: json["webuserId"],

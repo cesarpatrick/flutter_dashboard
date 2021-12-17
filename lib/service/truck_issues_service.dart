@@ -34,8 +34,12 @@ class TruckIssuesService {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      issues = Future.value(truckIssueFromJson(response.body));
-      return issues;
+
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+
+      return parsed
+          .map<TruckIssue>((json) => TruckIssue.fromMap(json))
+          .toList();
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
