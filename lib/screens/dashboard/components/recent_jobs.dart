@@ -1,4 +1,4 @@
-import 'package:admin/models/Job.dart';
+import 'package:admin/models/JobInfo.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +13,7 @@ class RecentJobs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = TextStyle(fontSize: 14);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -31,19 +32,41 @@ class RecentJobs extends StatelessWidget {
             child: DataTable2(
               columnSpacing: defaultPadding,
               minWidth: 600,
+              dataRowHeight: 100,
               columns: [
                 DataColumn(
-                  label: Text("Truck"),
+                  label: Text("Truck", style: textStyle),
                 ),
                 DataColumn(
-                  label: Text("Date"),
+                  label: Text("Date", style: textStyle),
                 ),
                 DataColumn(
-                  label: Text("Reported"),
+                  label: Text("Reported By", style: textStyle),
                 ),
+                DataColumn(
+                  label: Text("Issue Type", style: textStyle),
+                ),
+                DataColumn(
+                  label: Text("Message", style: textStyle),
+                ),
+                DataColumn(
+                  label: Text("Note", style: textStyle),
+                ),
+                DataColumn(
+                  label: Text("Requested", style: textStyle),
+                ),
+                DataColumn(
+                  label: Text("Category", style: textStyle),
+                ),
+                DataColumn(
+                  label: Text("RCA", style: textStyle),
+                ),
+                DataColumn(
+                  label: Text("Updated", style: textStyle),
+                )
               ],
               rows: List.generate(demoJobs.length,
-                  (index) => recentFileDataRow(demoJobs[index], context)),
+                  (index) => recentJobsDataRow(demoJobs[index], context)),
             ),
           ),
         ],
@@ -634,24 +657,31 @@ showSimpleModalDialog(context) {
       });
 }
 
-DataRow recentFileDataRow(Job jobInfo, BuildContext context) {
+DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
+  TextStyle textStyle = TextStyle(fontSize: 12);
+
   return DataRow(
     cells: [
       DataCell(
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 40,
-              width: 40,
+              height: 30,
+              width: 30,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Icon(Icons.car_repair, color: Colors.black),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text(jobInfo.truck!),
+            SizedBox(
+              width: 10,
+              height: 10,
+            ),
+            Text(
+              jobInfo.truck!,
+              style: textStyle,
             ),
           ],
         ),
@@ -659,8 +689,15 @@ DataRow recentFileDataRow(Job jobInfo, BuildContext context) {
           showSimpleModalDialog(context);
         },
       ),
-      DataCell(Text(jobInfo.date!)),
-      DataCell(Text(jobInfo.driver!)),
+      DataCell(Text(jobInfo.date!, style: textStyle)),
+      DataCell(Text(jobInfo.driver!, style: textStyle)),
+      DataCell(Text(jobInfo.issueType!, style: textStyle)),
+      DataCell(Text(jobInfo.message!, style: textStyle)),
+      DataCell(Text(jobInfo.note!, style: textStyle)),
+      DataCell(Text(jobInfo.truckRequested!, style: textStyle)),
+      DataCell(Text(jobInfo.category!, style: textStyle)),
+      DataCell(Text(jobInfo.rca!, style: textStyle)),
+      DataCell(Text(jobInfo.updated!, style: textStyle)),
     ],
   );
 }

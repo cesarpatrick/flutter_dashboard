@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import 'chart.dart';
-import 'service_info_card.dart';
+import 'job_info_card.dart';
 
 class JobDetails extends StatelessWidget {
   const JobDetails({

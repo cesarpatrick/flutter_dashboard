@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:admin/models/WorkshopStatus.dart';
+import '../../../constants.dart';
 
 class WorkshopStatusService {
 
   Future<WorkshopStatus> getStatus() async {
    final response = await http
-      .post(Uri.parse('https://rdltr.com:8999/rdl-report-ws/ws/report/workshopstatus/cfac1eb0-dde6-4e0b-97fc-6b794105f5fd'));
+      .post(Uri.parse(WORKSHOP_STATUS_ENDPOINT + API_KEY));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
