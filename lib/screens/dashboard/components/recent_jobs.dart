@@ -1,4 +1,6 @@
 import 'package:admin/models/JobInfo.dart';
+import 'package:admin/models/TruckIssue.dart';
+import 'package:admin/service/truck_issues_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -7,72 +9,111 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import '../../../constants.dart';
 
 class RecentJobs extends StatelessWidget {
-  const RecentJobs({
-    Key? key,
-  }) : super(key: key);
+  const RecentJobs();
 
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = TextStyle(fontSize: 14);
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Jobs",
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: DataTable2(
-              columnSpacing: defaultPadding,
-              minWidth: 600,
-              dataRowHeight: 100,
-              columns: [
-                DataColumn(
-                  label: Text("Truck", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Date", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Reported By", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Issue Type", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Message", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Note", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Requested", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Category", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("RCA", style: textStyle),
-                ),
-                DataColumn(
-                  label: Text("Updated", style: textStyle),
-                )
-              ],
-              rows: List.generate(demoJobs.length,
-                  (index) => recentJobsDataRow(demoJobs[index], context)),
+
+    final TruckIssuesService api = TruckIssuesService();
+    Future<List<TruckIssue>> truckIssuesList = api.getList();
+    return FutureBuilder<List<TruckIssue>>(
+        future: truckIssuesList,
+        builder: (context, snapshot) {
+          List<TruckIssue> list = List<TruckIssue>.empty();
+          List jobs = List.empty();
+
+          if (snapshot.data != null) {
+            list = snapshot.data!;
+            jobs = _getJobInfoList(list);
+          }
+
+          return Container(
+            padding: EdgeInsets.all(defaultPadding),
+            decoration: BoxDecoration(
+              color: secondaryColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
-          ),
-        ],
-      ),
-    );
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Jobs",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: DataTable2(
+                    columnSpacing: defaultPadding,
+                    minWidth: 600,
+                    dataRowHeight: 100,
+                    columns: [
+                      DataColumn(
+                        label: Text("Truck", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Date", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Reported By", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Issue Type", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Message", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Note", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Requested", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Category", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("RCA", style: textStyle),
+                      ),
+                      DataColumn(
+                        label: Text("Updated", style: textStyle),
+                      )
+                    ],
+                    rows: List.generate(jobs.length,
+                        (index) => recentJobsDataRow(jobs[index], context)),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
+}
+
+List _getJobInfoList(List<TruckIssue> list) {
+  List jobs = [
+    for (TruckIssue item in list)
+      {
+        {
+          JobInfo(
+              icon: "assets/icons/truck-icon.svg",
+              truck: item.id!.toString(),
+              date: item.createdOn!.toString(),
+              driver: item.webuserId!.toString(),
+              issueType: item.truckIssueType!.toString(),
+              message: item.issueNote!,
+              category: item.truckIssueType!.toString(),
+              note: item.workshopNote!,
+              rca: item.truckIssueType!.toString(),
+              truckRequested: item.createdOn!.toString() +
+                  " - " +
+                  item.updatedOn!.toString(),
+              updated: item.updatedOn!.toString())
+        }
+      }
+  ];
+
+  return jobs;
 }
 
 showSimpleModalDialog(context) {

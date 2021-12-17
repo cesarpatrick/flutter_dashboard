@@ -24,9 +24,9 @@ class TruckIssue {
     this.fixedByWebuserId,
     this.workshopNote,
     this.workshopStatus,
-    this.key,
     this.workshopRequest,
     this.workshopEtc,
+    required this.key,
   });
 
   int? id;
@@ -41,9 +41,9 @@ class TruckIssue {
   int? fixedByWebuserId;
   String? workshopNote;
   int? workshopStatus;
-  Key? key;
   DateTime? workshopRequest;
   DateTime? workshopEtc;
+  Key key;
 
   factory TruckIssue.fromJson(Map<String, dynamic> json) => TruckIssue(
         id: json["id"],
@@ -51,9 +51,11 @@ class TruckIssue {
         webuserId: json["webuserId"],
         truckIssueType: json["truckIssueType"],
         issueNote: json["issueNote"],
-        createdOn: DateTime.parse(json["createdOn"]),
-        updatedOn: json["updatedOn"] == null
+        createdOn: json["createdOn"] == null
             ? null
+            : DateTime.parse(json["createdOn"]),
+        updatedOn: json["updatedOn"] == null
+            ? DateTime.now()
             : DateTime.parse(json["updatedOn"]),
         completed: json["completed"],
         fixedOn:
@@ -62,13 +64,13 @@ class TruckIssue {
             json["fixedByWebuserId"] == null ? null : json["fixedByWebuserId"],
         workshopNote: json["workshopNote"],
         workshopStatus: json["workshopStatus"],
-        key: Key.fromJson(json["_key"]),
         workshopRequest: json["workshopRequest"] == null
-            ? null
+            ? DateTime.now()
             : DateTime.parse(json["workshopRequest"]),
         workshopEtc: json["workshopEtc"] == null
-            ? null
+            ? DateTime.now()
             : DateTime.parse(json["workshopEtc"]),
+        key: Key.fromJson(json["_key"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,20 +86,20 @@ class TruckIssue {
         "fixedByWebuserId": fixedByWebuserId == null ? null : fixedByWebuserId,
         "workshopNote": workshopNote,
         "workshopStatus": workshopStatus,
-        "_key": key!.toJson(),
         "workshopRequest":
             workshopRequest == null ? null : workshopRequest!.toIso8601String(),
         "workshopEtc":
             workshopEtc == null ? null : workshopEtc!.toIso8601String(),
+        "_key": key.toJson(),
       };
 }
 
 class Key {
   Key({
-    this.id,
+    required this.id,
   });
 
-  int? id;
+  int id;
 
   factory Key.fromJson(Map<String, dynamic> json) => Key(
         id: json["id"],

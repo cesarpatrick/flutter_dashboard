@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import '../../../constants.dart';
 
 class TruckIssuesService {
-  Future<TruckIssue> getList() async {
+  Future<List<TruckIssue>> getList() async {
+    Future<List<TruckIssue>> issues = Future.value(List<TruckIssue>.empty());
     // var end = DateTime.now();
     // var start;
     // if (end.month < 4) {
@@ -26,14 +27,15 @@ class TruckIssuesService {
 
     //var queryString = Uri(queryParameters: queryParams).query;
     //var url = endpointUrl + '?' + queryString;
-    final response = await http.post(Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT +
+    final response = await http.get(Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT +
         API_KEY +
         "?start=2021-11-01&end=2021-12-17"));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      return TruckIssue.fromJson(jsonDecode(response.body));
+      issues = Future.value(truckIssueFromJson(response.body));
+      return issues;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
