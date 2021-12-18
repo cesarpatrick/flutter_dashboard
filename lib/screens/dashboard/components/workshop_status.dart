@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import 'workshop_status_info_card.dart';
-import 'package:admin/service/workshop_status_service';
+import 'package:admin/service/workshop_status_service.dart';
 
 class WorkshopStatusWidget extends StatelessWidget {
   const WorkshopStatusWidget({

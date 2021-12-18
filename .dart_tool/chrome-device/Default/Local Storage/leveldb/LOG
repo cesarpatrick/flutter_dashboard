@@ -1,9 +1,16 @@
-2021/12/17-16:35:34.713 3 Reusing MANIFEST /tmp/flutter_tools.ILBIRB/flutter_tools_chrome_device.LSADKK/Default/Local Storage/leveldb/MANIFEST-000001
-2021/12/17-16:35:34.713 3 Recovering log #11
-2021/12/17-16:35:34.713 3 Reusing old log /tmp/flutter_tools.ILBIRB/flutter_tools_chrome_device.LSADKK/Default/Local Storage/leveldb/000011.log 
-2021/12/17-16:35:34.714 3 Delete type=0 #4
-2021/12/17-16:35:34.714 3 Delete type=2 #7
-2021/12/17-16:35:34.714 3 Delete type=2 #3
-2021/12/17-16:35:34.714 3 Delete type=0 #3
-2021/12/17-16:35:34.714 3 Delete type=2 #9
-2021/12/17-16:35:34.714 3 Delete type=0 #8
+2021/12/18-14:46:25.386 179c Reusing MANIFEST C:\Users\Cesar\AppData\Local\Temp\flutter_tools.10f35710\flutter_tools_chrome_device.f81a10db\Default\Local Storage\leveldb/MANIFEST-000001
+2021/12/18-14:46:25.388 179c Recovering log #3
+2021/12/18-14:46:25.388 179c Level-0 table #3: started
+2021/12/18-14:46:25.463 179c Level-0 table #3: 14877 bytes OK
+2021/12/18-14:46:25.463 179c Recovering log #4
+2021/12/18-14:46:25.464 179c Recovering log #8
+2021/12/18-14:46:25.464 179c Level-0 table #5: started
+2021/12/18-14:46:25.574 179c Level-0 table #5: 34751 bytes OK
+2021/12/18-14:46:25.574 179c Recovering log #11
+2021/12/18-14:46:25.575 179c Reusing old log C:\Users\Cesar\AppData\Local\Temp\flutter_tools.10f35710\flutter_tools_chrome_device.f81a10db\Default\Local Storage\leveldb/000011.log 
+2021/12/18-14:46:25.797 179c Delete type=0 #3
+2021/12/18-14:46:25.797 179c Delete type=0 #4
+2021/12/18-14:46:25.797 179c Delete type=2 #7
+2021/12/18-14:46:25.797 179c Delete type=0 #8
+2021/12/18-14:46:25.797 179c Delete type=2 #9
+2021/12/18-14:46:25.798 179c Delete type=2 #13

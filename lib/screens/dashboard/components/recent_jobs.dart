@@ -23,9 +23,11 @@ class RecentJobs extends StatelessWidget {
           List<TruckIssue> list = List<TruckIssue>.empty();
           List jobs = List.empty();
 
-          if (snapshot.data != null) {
+          if (snapshot.hasData) {
             list = snapshot.data!;
             jobs = _getJobInfoList(list);
+          } else {
+            return Text('${snapshot.error}');
           }
 
           return Container(
@@ -90,28 +92,24 @@ class RecentJobs extends StatelessWidget {
   }
 }
 
-List _getJobInfoList(List<TruckIssue> list) {
-  List jobs = [
-    for (TruckIssue item in list)
-      {
-        {
-          JobInfo(
-              icon: "assets/icons/truck-icon.svg",
-              truck: item.id!.toString(),
-              date: item.createdOn!.toString(),
-              driver: item.webuserId!.toString(),
-              issueType: item.truckIssueType!.toString(),
-              message: item.issueNote!,
-              category: item.truckIssueType!.toString(),
-              note: item.workshopNote!,
-              rca: item.truckIssueType!.toString(),
-              truckRequested: item.createdOn!.toString() +
-                  " - " +
-                  item.updatedOn!.toString(),
-              updated: item.updatedOn!.toString())
-        }
-      }
-  ];
+List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
+  List<JobInfo> jobs = [];
+  for (int i = 0; i < list.length; i++) {
+    jobs.add(new JobInfo(
+        icon: "assets/icons/truck-icon.svg",
+        truck: list[i].id!.toString(),
+        date: list[i].createdOn!.toString(),
+        driver: list[i].webuserId!.toString(),
+        issueType: list[i].truckIssueType!.toString(),
+        message: list[i].issueNote!,
+        category: list[i].truckIssueType!.toString(),
+        note: list[i].workshopNote!,
+        rca: list[i].truckIssueType!.toString(),
+        truckRequested: list[i].createdOn!.toString() +
+            " - " +
+            list[i].updatedOn!.toString(),
+        updated: list[i].updatedOn!.toString()));
+  }
 
   return jobs;
 }
