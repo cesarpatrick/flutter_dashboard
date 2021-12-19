@@ -10,7 +10,7 @@ class TruckIssuesService {
 
     final response = await http.get(Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT +
         API_KEY +
-        "?start=2021-12-01&end=2021-12-17"));
+        "?start=2021-12-10&end=2021-12-17"));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

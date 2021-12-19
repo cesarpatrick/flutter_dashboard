@@ -45,6 +45,7 @@ class RecentJobs extends StatelessWidget {
                 ),
                 SizedBox(
                   width: double.infinity,
+                  height: 800,
                   child: DataTable2(
                     columnSpacing: defaultPadding,
                     minWidth: 600,
