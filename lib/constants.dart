@@ -22,3 +22,6 @@ const String TRUCK_ISSUES_LIST_ENDPOINT =
 
 const String TRUCK_LIST_ENDPOINT =
     "https://rdltr.com:8999/rdl-report-ws/ws/cache/trucks/";
+
+const String TRUCK_ISSUES_RCA_LIST_ENDPOINT =
+    "https://rdltr.com:8999/rdlws51/ws/trucks/issue/status/list/";

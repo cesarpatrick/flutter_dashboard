@@ -2,7 +2,9 @@ import 'package:admin/models/JobInfo.dart';
 import 'package:admin/models/Truck.dart';
 import 'package:admin/models/TruckIssue.dart';
 import 'package:admin/models/TruckIssueCategory.dart';
+import 'package:admin/models/TruckIssueRca.dart';
 import 'package:admin/models/TruckIssueType.dart';
+import 'package:admin/screens/dashboard/components/truck_issue_category_dropdown.dart';
 import 'package:admin/service/truck_issues_service.dart';
 import 'package:admin/service/truck_service.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -109,7 +111,7 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
         message: list[i].issueNote!,
         category: list[i].truckIssueType!.toString(),
         note: list[i].workshopNote!,
-        rca: list[i].truckIssueType!.toString(),
+        rca: list[i].workshopStatus!.toString(),
         truckRequested: list[i].createdOn!.toString() +
             " - " +
             list[i].updatedOn!.toString(),
@@ -122,6 +124,12 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
 showSimpleModalDialog(
     {required BuildContext context, required String rego, required issueId}) {
   final TruckIssuesService api = TruckIssuesService();
+  Future<List<TruckIssue>> truckIssuesList = api.getListByRego(rego);
+
+  // FutureBuilder<List<TruckIssue>>(
+  //     future: truckIssuesList,
+  //     builder: (context, snapshot) {
+  //       List<TruckIssue> issues = snapshot.data!;
 
   showDialog(
       context: context,
@@ -131,22 +139,9 @@ showSimpleModalDialog(
         final format = DateFormat("dd-MM-yyyy");
         final timeFormat = DateFormat.jm();
 
-        Future<List<TruckIssue>> truckIssuesList = api.getListByRego(rego);
-
-        FutureBuilder<List<TruckIssue>>(
-            future: truckIssuesList,
-            builder: (context, snapshot) {
-              List<TruckIssue> issues = snapshot.data!;
-
-              if (snapshot.hasData) {
-                for (TruckIssue issue in issues) {
-                  if (rego == issue.id.toString()) {}
-                }
-              }
-
-              return const SizedBox();
-            });
-
+        // if (snapshot.hasData) {
+        //for (TruckIssue issue in issues) {
+        //if (rego == issue.id.toString()) {
         return Dialog(
           backgroundColor: Colors.white,
           shape:
@@ -648,7 +643,7 @@ showSimpleModalDialog(
                               ),
                               SizedBox(height: 20, width: 50),
                               DropdownButton<String>(
-                                value: categoryDropdownValue,
+                                value: dropdownValue,
                                 style: const TextStyle(color: Colors.black),
                                 dropdownColor: Colors.white,
                                 underline: Container(
@@ -656,13 +651,13 @@ showSimpleModalDialog(
                                   color: Colors.black,
                                 ),
                                 onChanged: (String? newValue) {
-                                  categoryDropdownValue = newValue!;
+                                  dropdownValue = newValue!;
                                 },
                                 items: <String>[
-                                  'Planned Service',
-                                  'Unplanned Service',
-                                  'Accident',
-                                  'Truck Remote Problem'
+                                  'Compactor / Tail Gate Controls',
+                                  'Brakes',
+                                  'Flat Tyre',
+                                  'Gear Box'
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -717,7 +712,13 @@ showSimpleModalDialog(
             ),
           ),
         );
+        //     }
+        //   }
+        // }
       });
+
+  return const SizedBox();
+  // });
 }
 
 DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
@@ -732,6 +733,8 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
       apiTruckIssueService.getTruckIssueCategories();
   Future<List<TruckIssueType>> listTypes =
       apiTruckIssueService.getTruckIssueType();
+
+  Future<List<TruckIssueRca>> listRca = apiTruckIssueService.getTruckIssueRCA();
 
   Future<List<Truck>> listTrucks = apiTruckService.getTrucks();
 
@@ -824,7 +827,21 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
 
             return const SizedBox();
           })),
-      DataCell(Text(jobInfo.rca!, style: textStyle)),
+      DataCell(FutureBuilder<List<TruckIssueRca>>(
+          future: listRca,
+          builder: (context, snapshot) {
+            List<TruckIssueRca> rcaList = snapshot.data!;
+
+            if (snapshot.hasData) {
+              for (TruckIssueRca c in rcaList) {
+                if (jobInfo.rca! == c.id.toString()) {
+                  return Text(c.type!, style: textStyle);
+                }
+              }
+            }
+
+            return const SizedBox();
+          })),
       DataCell(Text(jobInfo.updated!, style: textStyle)),
     ],
   );

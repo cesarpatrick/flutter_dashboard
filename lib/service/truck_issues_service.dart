@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:admin/models/TruckIssue.dart';
 import 'package:admin/models/TruckIssueCategory.dart';
+import 'package:admin/models/TruckIssueRca.dart';
 import 'package:admin/models/TruckIssueType.dart';
 import 'package:http/http.dart' as http;
 import '../../../constants.dart';
@@ -71,6 +72,26 @@ class TruckIssuesService {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load truck issues types');
+    }
+  }
+
+  Future<List<TruckIssueRca>> getTruckIssueRCA() async {
+    final response =
+        await http.get(Uri.parse(TRUCK_ISSUES_RCA_LIST_ENDPOINT + API_KEY));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+
+      return parsed
+          .map<TruckIssueRca>((json) => TruckIssueRca.fromJson(json))
+          .toList();
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load truck issues RCA');
     }
   }
 
