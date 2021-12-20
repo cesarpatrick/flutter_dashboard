@@ -13,18 +13,18 @@ String truckIssueCategoryToJson(List<TruckIssueCategory> data) =>
 
 class TruckIssueCategory {
   TruckIssueCategory({
-    required this.id,
+    this.id,
     this.truckIssueCategory,
     this.notifyOperations,
     this.workshopOnly,
-    required this.key,
+    this.key,
   });
 
-  int id;
+  int? id;
   String? truckIssueCategory;
   bool? notifyOperations;
   bool? workshopOnly;
-  Key key;
+  Key? key;
 
   factory TruckIssueCategory.fromJson(Map<String, dynamic> json) =>
       TruckIssueCategory(
@@ -40,7 +40,7 @@ class TruckIssueCategory {
         "truckIssueCategory": truckIssueCategory,
         "notifyOperations": notifyOperations,
         "workshopOnly": workshopOnly,
-        "_key": key.toJson(),
+        "_key": key!.toJson(),
       };
 }
 

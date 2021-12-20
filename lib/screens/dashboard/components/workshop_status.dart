@@ -78,20 +78,24 @@ class _WorkshopStatusCardGridViewState
     return FutureBuilder<WorkshopStatus>(
         future: workshopStatus,
         builder: (context, snapshot) {
-          List list = _getWorkshopInfoList(snapshot.data!);
-          return GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: list.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: widget.crossAxisCount,
-              crossAxisSpacing: defaultPadding,
-              mainAxisSpacing: defaultPadding,
-              childAspectRatio: widget.childAspectRatio,
-            ),
-            itemBuilder: (context, index) =>
-                WorkShopStatusCard(info: list[index]),
-          );
+          if (snapshot.hasData) {
+            List list = _getWorkshopInfoList(snapshot.data!);
+            return GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: list.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: widget.crossAxisCount,
+                crossAxisSpacing: defaultPadding,
+                mainAxisSpacing: defaultPadding,
+                childAspectRatio: widget.childAspectRatio,
+              ),
+              itemBuilder: (context, index) =>
+                  WorkShopStatusCard(info: list[index]),
+            );
+          }
+
+          throw Exception("No Data");
         });
   }
 

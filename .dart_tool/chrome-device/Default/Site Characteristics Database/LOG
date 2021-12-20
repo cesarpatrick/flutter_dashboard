@@ -1,4 +1,6 @@
-2021/12/19-14:44:18.999 6ac Reusing MANIFEST C:\Users\Cesar\AppData\Local\Temp\flutter_tools.2b24ef5\flutter_tools_chrome_device.fd44be07\Default\Site Characteristics Database/MANIFEST-000001
-2021/12/19-14:44:19.000 6ac Recovering log #6
-2021/12/19-14:44:19.000 6ac Reusing old log C:\Users\Cesar\AppData\Local\Temp\flutter_tools.2b24ef5\flutter_tools_chrome_device.fd44be07\Default\Site Characteristics Database/000006.log 
-2021/12/19-14:44:19.001 6ac Delete type=0 #3
+2021/12/20-13:44:42.050 1ba677 Reusing MANIFEST /tmp/flutter_tools.JKKMYE/flutter_tools_chrome_device.CBJZKQ/Default/Site Characteristics Database/MANIFEST-000001
+2021/12/20-13:44:42.050 1ba677 Recovering log #6
+2021/12/20-13:44:42.050 1ba677 Reusing old log /tmp/flutter_tools.JKKMYE/flutter_tools_chrome_device.CBJZKQ/Default/Site Characteristics Database/000006.log 
+2021/12/20-13:44:42.050 1ba677 Delete type=2 #4
+2021/12/20-13:44:42.050 1ba677 Delete type=0 #3
+2021/12/20-13:44:42.050 1ba677 Delete type=2 #6

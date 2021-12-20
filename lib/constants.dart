@@ -6,7 +6,7 @@ const bgColor = Color(0xFF212332);
 
 const defaultPadding = 16.0;
 
-const String API_KEY = "497ebb38-9fca-4e92-a30d-7a52cfa1bacc";
+const String API_KEY = "af523b10-d0bc-4c15-9c40-c6c5818013cc";
 
 const String WORKSHOP_STATUS_ENDPOINT =
     "https://rdltr.com:8999/rdl-report-ws/ws/report/workshopstatus/";
@@ -19,3 +19,6 @@ const String TRUCK_ISSUES_CATEGORIES_ENDPOINT =
 
 const String TRUCK_ISSUES_LIST_ENDPOINT =
     "https://rdltr.com:8999/rdl-pictures-ws2/ws/trucks/issue/all/";
+
+const String TRUCK_LIST_ENDPOINT =
+    "https://rdltr.com:8999/rdl-report-ws/ws/cache/trucks/";

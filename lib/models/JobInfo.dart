@@ -9,7 +9,8 @@ class JobInfo {
       truckRequested,
       category,
       rca,
-      updated;
+      updated,
+      id;
 
   JobInfo(
       {this.icon,
@@ -22,7 +23,8 @@ class JobInfo {
       this.note,
       this.rca,
       this.truckRequested,
-      this.updated});
+      this.updated,
+      this.id});
 }
 
 List demoJobs = [

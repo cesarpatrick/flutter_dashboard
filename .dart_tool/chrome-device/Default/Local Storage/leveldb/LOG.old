@@ -1,9 +1,21 @@
-2021/12/19-14:31:51.214 984 Reusing MANIFEST C:\Users\Cesar\AppData\Local\Temp\flutter_tools.31667b31\flutter_tools_chrome_device.81450801\Default\Local Storage\leveldb/MANIFEST-000001
-2021/12/19-14:31:51.216 984 Recovering log #11
-2021/12/19-14:31:51.217 984 Reusing old log C:\Users\Cesar\AppData\Local\Temp\flutter_tools.31667b31\flutter_tools_chrome_device.81450801\Default\Local Storage\leveldb/000011.log 
-2021/12/19-14:31:51.218 984 Delete type=0 #3
-2021/12/19-14:31:51.218 984 Delete type=0 #4
-2021/12/19-14:31:51.218 984 Delete type=2 #7
-2021/12/19-14:31:51.218 984 Delete type=0 #8
-2021/12/19-14:31:51.218 984 Delete type=2 #9
-2021/12/19-14:31:51.218 984 Delete type=2 #13
+2021/12/20-13:36:12.036 3 Reusing MANIFEST /tmp/flutter_tools.QFALNM/flutter_tools_chrome_device.DJGMZQ/Default/Local Storage/leveldb/MANIFEST-000001
+2021/12/20-13:36:12.036 3 Recovering log #28
+2021/12/20-13:36:12.037 3 Level-0 table #31: started
+2021/12/20-13:36:12.047 3 Level-0 table #31: 112320 bytes OK
+2021/12/20-13:36:12.054 3 Delete type=0 #15
+2021/12/20-13:36:12.054 3 Delete type=2 #16
+2021/12/20-13:36:12.054 3 Delete type=2 #21
+2021/12/20-13:36:12.054 3 Delete type=2 #19
+2021/12/20-13:36:12.054 3 Delete type=0 #25
+2021/12/20-13:36:12.054 3 Delete type=0 #4
+2021/12/20-13:36:12.054 3 Delete type=2 #7
+2021/12/20-13:36:12.054 3 Delete type=0 #11
+2021/12/20-13:36:12.054 3 Delete type=2 #5
+2021/12/20-13:36:12.054 3 Delete type=2 #3
+2021/12/20-13:36:12.054 3 Delete type=0 #3
+2021/12/20-13:36:12.054 3 Delete type=0 #28
+2021/12/20-13:36:12.054 3 Delete type=0 #18
+2021/12/20-13:36:12.054 3 Delete type=0 #22
+2021/12/20-13:36:12.054 3 Delete type=2 #9
+2021/12/20-13:36:12.054 3 Delete type=0 #8
+2021/12/20-13:36:12.054 3 Delete type=2 #13

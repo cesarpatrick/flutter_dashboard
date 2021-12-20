@@ -1,6 +1,10 @@
 import 'package:admin/models/JobInfo.dart';
+import 'package:admin/models/Truck.dart';
 import 'package:admin/models/TruckIssue.dart';
+import 'package:admin/models/TruckIssueCategory.dart';
+import 'package:admin/models/TruckIssueType.dart';
 import 'package:admin/service/truck_issues_service.dart';
+import 'package:admin/service/truck_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +17,7 @@ class RecentJobs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(fontSize: 14);
+    TextStyle textStyle = TextStyle(fontSize: 13);
 
     final TruckIssuesService api = TruckIssuesService();
     Future<List<TruckIssue>> truckIssuesList = api.getList();
@@ -98,7 +102,7 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
   for (int i = 0; i < list.length; i++) {
     jobs.add(new JobInfo(
         icon: "assets/icons/truck-icon.svg",
-        truck: list[i].id!.toString(),
+        truck: list[i].truckId!.toString(),
         date: list[i].createdOn!.toString(),
         driver: list[i].webuserId!.toString(),
         issueType: list[i].truckIssueType!.toString(),
@@ -115,7 +119,10 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
   return jobs;
 }
 
-showSimpleModalDialog(context) {
+showSimpleModalDialog(
+    {required BuildContext context, required String rego, required issueId}) {
+  final TruckIssuesService api = TruckIssuesService();
+
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -123,6 +130,22 @@ showSimpleModalDialog(context) {
         String categoryDropdownValue = 'Planned Service';
         final format = DateFormat("dd-MM-yyyy");
         final timeFormat = DateFormat.jm();
+
+        Future<List<TruckIssue>> truckIssuesList = api.getListByRego(rego);
+
+        FutureBuilder<List<TruckIssue>>(
+            future: truckIssuesList,
+            builder: (context, snapshot) {
+              List<TruckIssue> issues = snapshot.data!;
+
+              if (snapshot.hasData) {
+                for (TruckIssue issue in issues) {
+                  if (rego == issue.id.toString()) {}
+                }
+              }
+
+              return const SizedBox();
+            });
 
         return Dialog(
           backgroundColor: Colors.white,
@@ -698,7 +721,19 @@ showSimpleModalDialog(context) {
 }
 
 DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
-  TextStyle textStyle = TextStyle(fontSize: 12);
+  TextStyle textStyle = TextStyle(fontSize: 10);
+
+  String truckRego = "";
+
+  final TruckIssuesService apiTruckIssueService = TruckIssuesService();
+  final TruckService apiTruckService = TruckService();
+
+  Future<List<TruckIssueCategory>> listCategories =
+      apiTruckIssueService.getTruckIssueCategories();
+  Future<List<TruckIssueType>> listTypes =
+      apiTruckIssueService.getTruckIssueType();
+
+  Future<List<Truck>> listTrucks = apiTruckService.getTrucks();
 
   return DataRow(
     cells: [
@@ -710,7 +745,7 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
               height: 30,
               width: 30,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.red,
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Icon(Icons.car_repair, color: Colors.black),
@@ -719,23 +754,76 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
               width: 10,
               height: 10,
             ),
-            Text(
-              jobInfo.truck!,
-              style: textStyle,
-            ),
+            FutureBuilder<List<Truck>>(
+                future: listTrucks,
+                builder: (context, snapshot) {
+                  List<Truck> trucks = snapshot.data!;
+
+                  if (snapshot.hasData) {
+                    for (Truck t in trucks) {
+                      if (jobInfo.truck! == t.id.toString()) {
+                        truckRego = t.truckRego!;
+                        return Text(t.truckRego!,
+                            style: TextStyle(color: Colors.red, fontSize: 10));
+                      }
+                    }
+                  }
+
+                  return const SizedBox();
+                }),
           ],
         ),
         onTap: () {
-          showSimpleModalDialog(context);
+          showSimpleModalDialog(
+              context: context, rego: truckRego, issueId: jobInfo.id);
         },
       ),
       DataCell(Text(jobInfo.date!, style: textStyle)),
       DataCell(Text(jobInfo.driver!, style: textStyle)),
-      DataCell(Text(jobInfo.issueType!, style: textStyle)),
-      DataCell(Text(jobInfo.message!, style: textStyle)),
-      DataCell(Text(jobInfo.note!, style: textStyle)),
+      DataCell(FutureBuilder<List<TruckIssueType>>(
+          future: listTypes,
+          builder: (context, snapshot) {
+            List<TruckIssueType> types = snapshot.data!;
+
+            if (snapshot.hasData) {
+              for (TruckIssueType c in types) {
+                if (jobInfo.issueType! == c.id.toString()) {
+                  return Text(
+                    c.name!,
+                    style: textStyle,
+                  );
+                }
+              }
+            }
+
+            return const SizedBox();
+          })),
+      DataCell(new Container(
+          child: new SingleChildScrollView(
+              child: new Column(children: <Widget>[
+        Text(jobInfo.message!, style: textStyle, textAlign: TextAlign.justify)
+      ])))),
+      DataCell(new Container(
+          child: new SingleChildScrollView(
+              child: new Column(children: <Widget>[
+        Text(jobInfo.note!, style: textStyle, textAlign: TextAlign.justify)
+      ])))),
       DataCell(Text(jobInfo.truckRequested!, style: textStyle)),
-      DataCell(Text(jobInfo.category!, style: textStyle)),
+      DataCell(FutureBuilder<List<TruckIssueCategory>>(
+          future: listCategories,
+          builder: (context, snapshot) {
+            List<TruckIssueCategory> categories = snapshot.data!;
+
+            if (snapshot.hasData) {
+              for (TruckIssueCategory c in categories) {
+                if (jobInfo.category! == c.id.toString()) {
+                  return Text(c.truckIssueCategory!, style: textStyle);
+                }
+              }
+            }
+
+            return const SizedBox();
+          })),
       DataCell(Text(jobInfo.rca!, style: textStyle)),
       DataCell(Text(jobInfo.updated!, style: textStyle)),
     ],
