@@ -9,7 +9,7 @@ String truckIssueTypeToJson(List<TruckIssueType> data) =>
 
 class TruckIssueType {
   TruckIssueType({
-    required this.id,
+    this.id,
     this.name,
     this.truckIssueCategoryId,
     this.key,

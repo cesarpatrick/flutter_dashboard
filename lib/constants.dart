@@ -6,7 +6,7 @@ const bgColor = Color(0xFF212332);
 
 const defaultPadding = 16.0;
 
-const String API_KEY = "af523b10-d0bc-4c15-9c40-c6c5818013cc";
+const String API_KEY = "52d47770-ddb8-44f2-be02-86fef8a756a9";
 
 const String WORKSHOP_STATUS_ENDPOINT =
     "https://rdltr.com:8999/rdl-report-ws/ws/report/workshopstatus/";

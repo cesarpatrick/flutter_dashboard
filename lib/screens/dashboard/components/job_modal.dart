@@ -1,27 +1,35 @@
+import 'package:admin/models/JobInfo.dart';
+import 'package:admin/models/Truck.dart';
+import 'package:admin/models/TruckIssueCategory.dart';
+import 'package:admin/models/TruckIssueRca.dart';
+import 'package:admin/models/TruckIssueType.dart';
+import 'package:admin/service/truck_issues_service.dart';
+import 'package:admin/service/truck_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
-class JobModal extends StatefulWidget {
-  const JobModal({Key? key, required BuildContext context}) : super(key: key);
+import 'truck_issue_category_dropdown.dart';
+import 'truck_issue_type_dropdown.dart';
 
-  @override
-  _JobModalState createState() => _JobModalState();
-}
+class JobModal extends StatelessWidget {
+  final JobInfo jobInfo;
+  final BuildContext contextPai;
+  const JobModal(this.contextPai, this.jobInfo);
 
-class _JobModalState extends State<JobModal> {
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = 'Brakes';
-    String categoryDropdownValue = 'Planned Service';
-    final format = DateFormat("dd-MM-yyyy");
-    final timeFormat = DateFormat.jm();
+    String truckRego = '';
+
+    final TruckService apiTruckService = TruckService();
+
+    Future<List<Truck>> listTrucks = apiTruckService.getTrucks();
 
     return Dialog(
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Container(
-        constraints: BoxConstraints(maxHeight: 750, maxWidth: 600),
+        constraints: BoxConstraints(maxHeight: 650, maxWidth: 600),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -29,7 +37,22 @@ class _JobModalState extends State<JobModal> {
             children: [
               Chip(
                   backgroundColor: Color.fromRGBO(33, 35, 50, 10),
-                  label: Text("Job for NSQ810")),
+                  label: FutureBuilder<List<Truck>>(
+                      future: listTrucks,
+                      builder: (context, snapshot) {
+                        List<Truck> trucks = snapshot.data!;
+
+                        if (snapshot.hasData) {
+                          for (Truck t in trucks) {
+                            if (jobInfo.truck! == t.id.toString()) {
+                              truckRego = t.truckRego!;
+                              return Text("Job for " + truckRego);
+                            }
+                          }
+                        }
+
+                        return const SizedBox();
+                      })),
               SizedBox(height: 20),
               Column(
                 children: [
@@ -41,14 +64,15 @@ class _JobModalState extends State<JobModal> {
                           RichText(
                             text: TextSpan(
                               style: DefaultTextStyle.of(context).style,
-                              children: const <TextSpan>[
+                              children: <TextSpan>[
                                 TextSpan(
                                     text: 'Date Reported' + '   ',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
-                                    text: '08/12/2021 13:10' + '      ',
+                                    text: jobInfo.date!.substring(0, 10) +
+                                        '      ',
                                     style: TextStyle(color: Colors.black)),
                                 TextSpan(
                                     text: 'Truck' + '   ',
@@ -56,7 +80,7 @@ class _JobModalState extends State<JobModal> {
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
-                                    text: 'NSQ810' + '      ',
+                                    text: truckRego + '      ',
                                     style: TextStyle(color: Colors.black)),
                                 TextSpan(
                                     text: 'Reported By' + '    ',
@@ -64,7 +88,7 @@ class _JobModalState extends State<JobModal> {
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
-                                    text: 'Cesar Gouveia',
+                                    text: jobInfo.driver,
                                     style: TextStyle(color: Colors.black))
                               ],
                             ),
@@ -94,29 +118,7 @@ class _JobModalState extends State<JobModal> {
                             ),
                           ),
                           SizedBox(height: 20, width: 50),
-                          DropdownButton<String>(
-                            value: dropdownValue,
-                            style: const TextStyle(color: Colors.black),
-                            dropdownColor: Colors.white,
-                            underline: Container(
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                            onChanged: (String? newValue) {
-                              dropdownValue = newValue!;
-                            },
-                            items: <String>[
-                              'Compactor / Tail Gate Controls',
-                              'Brakes',
-                              'Flat Tyre',
-                              'Gear Box'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          )
+                          TruckIssueTypeDropDown()
                         ],
                       )),
                 ],
@@ -147,8 +149,7 @@ class _JobModalState extends State<JobModal> {
                               width: 450,
                               child: TextField(
                                 controller: TextEditingController()
-                                  ..text =
-                                      'I hit the corner of a roof of a building at the Fire station Te Atatu. some damage to roof. no damage to truck.',
+                                  ..text = jobInfo.message!,
                                 readOnly: true,
                                 style: TextStyle(color: Colors.black),
                                 decoration: new InputDecoration(
@@ -207,69 +208,19 @@ class _JobModalState extends State<JobModal> {
                             height: 20,
                             width: 20,
                           ),
-                          SizedBox(
-                              height: 40,
-                              width: 160,
-                              child: DateTimeField(
-                                initialValue: new DateTime(2021),
-                                style: TextStyle(color: Colors.black),
-                                format: format,
-                                onShowPicker: (context, currentValue) {
-                                  return showDatePicker(
-                                      context: context,
-                                      firstDate: DateTime(1900),
-                                      initialDate:
-                                          currentValue ?? DateTime.now(),
-                                      lastDate: DateTime(2100));
-                                },
-                                decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                          RichText(
+                            text: TextSpan(
+                              style: DefaultTextStyle.of(context).style,
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: jobInfo.date!.substring(0, 10),
+                                    style: TextStyle(
+                                        backgroundColor: Colors.grey,
                                         color: Colors.black,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    border: new OutlineInputBorder(
-                                      borderSide: new BorderSide(),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                              )),
-                          SizedBox(height: 20, width: 10),
-                          SizedBox(
-                              height: 40,
-                              width: 140,
-                              child: DateTimeField(
-                                initialValue: new DateTime(2021),
-                                style: TextStyle(color: Colors.black),
-                                format: timeFormat,
-                                onShowPicker: (context, currentValue) async {
-                                  final time = await showTimePicker(
-                                    context: context,
-                                    initialTime: TimeOfDay.fromDateTime(
-                                        currentValue ?? DateTime.now()),
-                                  );
-                                  return DateTimeField.convert(time);
-                                },
-                                decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.black,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    border: new OutlineInputBorder(
-                                      borderSide: new BorderSide(),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                              )),
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
                           SizedBox(height: 20, width: 20),
                         ],
                       )),
@@ -302,68 +253,17 @@ class _JobModalState extends State<JobModal> {
                             height: 20,
                             width: 20,
                           ),
-                          SizedBox(
-                              height: 40,
-                              width: 160,
-                              child: DateTimeField(
-                                initialValue: new DateTime(2021),
-                                style: TextStyle(color: Colors.black),
-                                format: format,
-                                onShowPicker: (context, currentValue) {
-                                  return showDatePicker(
-                                      context: context,
-                                      firstDate: DateTime(1900),
-                                      initialDate:
-                                          currentValue ?? DateTime.now(),
-                                      lastDate: DateTime(2100));
-                                },
-                                decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                          RichText(
+                            text: TextSpan(
+                              style: DefaultTextStyle.of(context).style,
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: jobInfo.updated!.substring(0, 10),
+                                    style: TextStyle(
+                                        backgroundColor: Colors.grey,
                                         color: Colors.black,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    border: new OutlineInputBorder(
-                                      borderSide: new BorderSide(),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                              )),
-                          SizedBox(height: 20, width: 10),
-                          SizedBox(
-                            height: 40,
-                            width: 140,
-                            child: DateTimeField(
-                              initialValue: new DateTime(2021),
-                              style: TextStyle(color: Colors.black),
-                              format: timeFormat,
-                              onShowPicker: (context, currentValue) async {
-                                final time = await showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.fromDateTime(
-                                      currentValue ?? DateTime.now()),
-                                );
-                                return DateTimeField.convert(time);
-                              },
-                              decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                  border: new OutlineInputBorder(
-                                    borderSide: new BorderSide(),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                    ),
-                                  )),
+                                        fontWeight: FontWeight.bold))
+                              ],
                             ),
                           )
                         ],
@@ -371,62 +271,6 @@ class _JobModalState extends State<JobModal> {
                 ],
               ),
               SizedBox(height: 20),
-              Column(
-                children: [
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          RichText(
-                            text: TextSpan(
-                              style: DefaultTextStyle.of(context).style,
-                              children: const <TextSpan>[
-                                TextSpan(
-                                    text: 'Add Note',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold))
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 20, width: 50),
-                          SizedBox(
-                              height: 100,
-                              width: 450,
-                              child: TextField(
-                                style: TextStyle(color: Colors.black),
-                                decoration: new InputDecoration(
-                                    fillColor: Colors.black,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(25.0),
-                                      borderSide: BorderSide(
-                                        color: Colors.black,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    border: new OutlineInputBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(25.0),
-                                      borderSide: new BorderSide(),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(25.0),
-                                      borderSide: BorderSide(
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                    //fillColor: Colors.green
-                                    ),
-                                minLines:
-                                    2, // any number you need (It works as the rows for the textarea)
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              )),
-                        ],
-                      )),
-                ],
-              ),
               Column(
                 children: [
                   Align(
@@ -452,8 +296,7 @@ class _JobModalState extends State<JobModal> {
                               width: 450,
                               child: TextField(
                                 controller: TextEditingController()
-                                  ..text =
-                                      'Humbolt has filled in damage report form \n #---#neville @ 09/12/2021 10:39',
+                                  ..text = jobInfo.note!,
                                 readOnly: true,
                                 style: TextStyle(color: Colors.black),
                                 decoration: new InputDecoration(
@@ -509,29 +352,7 @@ class _JobModalState extends State<JobModal> {
                             ),
                           ),
                           SizedBox(height: 20, width: 50),
-                          DropdownButton<String>(
-                            value: categoryDropdownValue,
-                            style: const TextStyle(color: Colors.black),
-                            dropdownColor: Colors.white,
-                            underline: Container(
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                            onChanged: (String? newValue) {
-                              categoryDropdownValue = newValue!;
-                            },
-                            items: <String>[
-                              'Planned Service',
-                              'Unplanned Service',
-                              'Accident',
-                              'Truck Remote Problem'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          )
+                          TruckIssueCategoriesDropDown()
                         ],
                       )),
                 ],
@@ -555,20 +376,7 @@ class _JobModalState extends State<JobModal> {
                               Navigator.pop(context);
                             },
                             child: const Text('Close'),
-                          ),
-                          SizedBox(height: 0, width: 10),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.all(16.0),
-                              backgroundColor: Color.fromRGBO(33, 35, 50, 10),
-                              primary: Colors.white,
-                              textStyle: const TextStyle(fontSize: 14),
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Save'),
-                          ),
+                          )
                         ],
                       )),
                 ],
