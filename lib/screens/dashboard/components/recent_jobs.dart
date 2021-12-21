@@ -178,7 +178,7 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return JobModal(context, jobInfo);
+              return JobModal(jobInfo);
             });
       }),
       DataCell(Text(jobInfo.date!, style: textStyle)),

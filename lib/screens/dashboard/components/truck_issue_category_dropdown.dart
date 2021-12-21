@@ -2,12 +2,21 @@ import 'package:admin/models/TruckIssueCategory.dart';
 import 'package:admin/service/truck_issues_service.dart';
 import 'package:flutter/material.dart';
 
-class TruckIssueCategoriesDropDown extends StatelessWidget {
-  const TruckIssueCategoriesDropDown();
+class TruckIssueCategoriesDropDown extends StatefulWidget {
+  final int id;
+  const TruckIssueCategoriesDropDown(this.id);
+
+  @override
+  _TruckIssueCategoriesDropDownState createState() =>
+      _TruckIssueCategoriesDropDownState();
+}
+
+class _TruckIssueCategoriesDropDownState
+    extends State<TruckIssueCategoriesDropDown> {
+  String categoryDropdownValue = "";
 
   @override
   Widget build(BuildContext context) {
-    TruckIssueCategory categoryDropdownValue = TruckIssueCategory();
     final TruckIssuesService apiTruckIssueService = TruckIssuesService();
     final Future<List<TruckIssueCategory>> categoriesList =
         apiTruckIssueService.getTruckIssueCategories();
@@ -16,17 +25,23 @@ class TruckIssueCategoriesDropDown extends StatelessWidget {
         future: categoriesList,
         builder: (context, snapshot) {
           List<TruckIssueCategory> list = snapshot.data!;
-          List<DropdownMenuItem<TruckIssueCategory>> dropDownItemList = [];
+          List<DropdownMenuItem<String>> dropDownItemList = [];
+
+          dropDownItemList
+              .add(DropdownMenuItem<String>(value: "", child: Text("")));
 
           for (TruckIssueCategory item in list) {
-            categoryDropdownValue = item;
-            dropDownItemList.add(DropdownMenuItem<TruckIssueCategory>(
-              value: item,
+            dropDownItemList.add(DropdownMenuItem<String>(
+              value: item.truckIssueCategory,
               child: Text(item.truckIssueCategory!),
             ));
+
+            if (widget.id == item.id) {
+              categoryDropdownValue = item.truckIssueCategory!;
+            }
           }
 
-          return DropdownButton<TruckIssueCategory>(
+          return DropdownButton<String>(
             value: categoryDropdownValue,
             style: const TextStyle(color: Colors.black),
             dropdownColor: Colors.white,
@@ -34,8 +49,10 @@ class TruckIssueCategoriesDropDown extends StatelessWidget {
               height: 2,
               color: Colors.black,
             ),
-            onChanged: (TruckIssueCategory? newValue) {
-              categoryDropdownValue = newValue!;
+            onChanged: (String? newValue) {
+              setState(() {
+                categoryDropdownValue = newValue!;
+              });
             },
             items: dropDownItemList,
           );

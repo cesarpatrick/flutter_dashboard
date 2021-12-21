@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:admin/models/Truck.dart';
 import 'package:admin/models/TruckIssue.dart';
 import 'package:admin/models/TruckIssueCategory.dart';
 import 'package:admin/models/TruckIssueRca.dart';
 import 'package:admin/models/TruckIssueType.dart';
 import 'package:admin/service/truck_service.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../../constants.dart';
 
@@ -16,7 +14,7 @@ class TruckIssuesService {
   Future<List<TruckIssue>> getList() async {
     final response = await http.get(Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT +
         API_KEY +
-        "?start=2021-12-16&end=2021-12-21"));
+        "?start=2021-12-18&end=2021-12-23"));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
