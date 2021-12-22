@@ -9,13 +9,11 @@ class Util extends StatelessWidget {
     return Container();
   }
 
-  static String convertDate(String date) {
+  static String formatDate(String date) {
     var inputFormat = DateFormat('yyyy-MM-dd');
     var date1 = inputFormat.parse(date);
 
     var outputFormat = DateFormat('dd/MM/yyyy');
-    var date2 = outputFormat.format(date1);
-
-    return date2;
+    return outputFormat.format(date1);
   }
 }
