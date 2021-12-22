@@ -17,7 +17,7 @@ class Chart extends StatelessWidget {
           PieChart(
             PieChartData(
               sectionsSpace: 0,
-              centerSpaceRadius: 70,
+              centerSpaceRadius: 80,
               startDegreeOffset: -90,
               sections: paiChartSelectionDatas,
             ),
@@ -28,17 +28,17 @@ class Chart extends StatelessWidget {
               children: [
                 SizedBox(height: defaultPadding),
                 Text(
-                  "58",
+                  "58 Done",
                   style: Theme.of(context).textTheme.headline4!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                         height: 0.5,
                       ),
                 ),
-                Text("of 100")
+                Text("of 100 Issues")
               ],
             ),
-          ),
+          )
         ],
       ),
     );

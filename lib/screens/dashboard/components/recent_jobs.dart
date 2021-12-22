@@ -10,6 +10,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../util.dart';
 import 'job_modal.dart';
 
 class RecentJobs extends StatelessWidget {
@@ -103,17 +104,17 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
     jobs.add(new JobInfo(
         icon: "assets/icons/truck-icon.svg",
         truck: list[i].truckId!.toString(),
-        date: list[i].createdOn!.toString(),
+        date: Util.convertDate(list[i].createdOn!.toString().substring(0, 10)),
         driver: list[i].webuserId!.toString(),
         issueType: list[i].truckIssueType!.toString(),
         message: list[i].issueNote!,
         category: list[i].truckIssueType!.toString(),
         note: list[i].workshopNote!,
         rca: list[i].workshopStatus!.toString(),
-        truckRequested: list[i].createdOn!.toString() +
-            " - " +
-            list[i].updatedOn!.toString(),
-        updated: list[i].updatedOn!.toString()));
+        truckRequested:
+            Util.convertDate(list[i].createdOn!.toString().substring(0, 10)),
+        updated:
+            Util.convertDate(list[i].updatedOn!.toString().substring(0, 10))));
   }
 
   return jobs;
