@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'variables.dart';
+import 'Variables.dart';
 
 Future<Webuser> authenticate(String userName, String password) async {
   final response = await http.post(Uri.parse(Variables.getAuthUrl() + "/up"),

@@ -29,3 +29,4 @@ const String TRUCK_ISSUES_RCA_LIST_ENDPOINT =
 //ROUTES
 const String LOGIN_ROUTE = "/";
 const String DASHBOARD_ROUTE = "/dashboard";
+const String INVENTORY_ROUTE = "/inventory";

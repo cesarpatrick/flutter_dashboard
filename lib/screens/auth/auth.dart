@@ -1,13 +1,7 @@
-/*
- * Copyright (c) 2018.  Think Believe Do Limited - All Rights Reserved.
- *                             	@author code@thinkbelievedo.com
- *  Some parts of this code would have been developed exclusively for clients of Think Believe Do Limited.
- */
-
 import 'dart:io';
 import 'package:admin/models/WebUser.dart';
-import 'package:admin/models/variables.dart';
-import 'package:admin/screens/main/main_screen.dart';
+import 'package:admin/models/Variables.dart';
+import 'package:admin/screens/main/main_dashboard_screen.dart';
 import 'package:admin/service/auth_key_service.dart';
 import 'package:admin/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +22,6 @@ _sharedPreferencesInit() async {
   if (prefs.getString("username")!.isEmpty) {
     await prefs.setString('username', '');
     await prefs.setString('password', '');
-    await prefs.setBool('isLoggedIn', false);
   }
 }
 
@@ -77,15 +70,6 @@ class _AuthState extends State<Auth> {
                               fontWeight: FontWeight.bold,
                             ),
                           )),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(70.0, 10.0, 70.0, 10.0),
-                        child: Text('Workshop Portal',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset('images/logo.png'),
@@ -179,10 +163,14 @@ class _AuthState extends State<Auth> {
   void checkUserLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String readName;
-    String readPass;
-    readName = prefs.getString('username').toString();
-    readPass = prefs.getString('password').toString();
+    String readName = '';
+    String readPass = '';
+
+    if (prefs.getString('username') != null &&
+        prefs.getString('password') != null) {
+      readName = prefs.getString('username').toString();
+      readPass = prefs.getString('password').toString();
+    }
 
     if (readName.isNotEmpty && readPass.isNotEmpty) {
       authUser(readName, readPass, context);
@@ -190,8 +178,8 @@ class _AuthState extends State<Auth> {
   }
 
   void goToDashboard(String value) {
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => MainScreen()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => MainDashboardScreen()));
   }
 
   void updatePrefs(String username, String password) async {

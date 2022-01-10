@@ -2,7 +2,8 @@ import 'package:admin/constants.dart';
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/page_not_found_screen.dart';
 import 'package:admin/screens/auth/auth.dart';
-import 'package:admin/screens/main/main_screen.dart';
+import 'package:admin/screens/main/main_dashboard_screen.dart';
+import 'package:admin/screens/main/main_inventory_screen.dart';
 import 'package:admin/service/auth_key_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute<void>(
             settings: settings,
             builder: (BuildContext context) =>
-                Scaffold(body: Center(child: PageNotFound())),
+                Scaffold(body: Center(child: const NotFoundPage())),
           );
         },
         routes: {
@@ -48,7 +49,15 @@ class MyApp extends StatelessWidget {
                     create: (context) => MenuController(),
                   ),
                 ],
-                child: MainScreen(),
+                child: MainDashboardScreen(),
+              ),
+          INVENTORY_ROUTE: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (context) => MenuController(),
+                  ),
+                ],
+                child: MainInventoryScreen(),
               ),
         });
   }

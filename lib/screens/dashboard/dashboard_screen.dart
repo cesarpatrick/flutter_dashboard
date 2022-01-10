@@ -3,7 +3,7 @@ import 'package:admin/screens/dashboard/components/workshop_status.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import 'components/header.dart';
+import '../main/components/header.dart';
 
 import 'components/recent_jobs.dart';
 import 'components/job_details.dart';
@@ -16,7 +16,9 @@ class DashboardScreen extends StatelessWidget {
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
-            Header(),
+            Header(
+              title: "Dashboard",
+            ),
             SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,

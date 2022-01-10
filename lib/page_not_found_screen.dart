@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
 
-class PageNotFound extends StatelessWidget {
-  const PageNotFound({Key? key}) : super(key: key);
+class NotFoundPage extends StatefulWidget {
+  const NotFoundPage();
+
+  @override
+  _NotFoundPageState createState() => _NotFoundPageState();
+}
+
+class _NotFoundPageState extends State<NotFoundPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  final RelativeRectTween _relativeRectTween = RelativeRectTween(
+    begin: RelativeRect.fromLTRB(24, 24, 24, 200),
+    end: RelativeRect.fromLTRB(24, 24, 24, 250),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 3))
+          ..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,11 +36,8 @@ class PageNotFound extends StatelessWidget {
       backgroundColor: const Color(0xffd8f3dc),
       body: Stack(
         children: [
-          Positioned(
-            top: 24,
-            bottom: 200,
-            left: 24,
-            right: 24,
+          PositionedTransition(
+            rect: _relativeRectTween.animate(_controller),
             child: Container(
               child: Image.asset('images/brain.png'),
             ),
