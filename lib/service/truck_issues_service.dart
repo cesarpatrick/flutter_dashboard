@@ -4,17 +4,19 @@ import 'package:admin/models/TruckIssue.dart';
 import 'package:admin/models/TruckIssueCategory.dart';
 import 'package:admin/models/TruckIssueRca.dart';
 import 'package:admin/models/TruckIssueType.dart';
+import 'package:admin/service/auth_key_service.dart';
 import 'package:admin/service/truck_service.dart';
 import 'package:http/http.dart' as http;
 import '../../../constants.dart';
 
 class TruckIssuesService {
   final TruckService apiTruckService = TruckService();
+  final AuthKeyService authKeyService = AuthKeyService();
 
   Future<List<TruckIssue>> getList() async {
     final response = await http.get(Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT +
-        API_KEY +
-        "?start=2021-12-18&end=2021-12-23"));
+        authKeyService.getAuthKey() +
+        "?start=2021-12-31&end=2022-01-10"));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -34,7 +36,7 @@ class TruckIssuesService {
 
   Future<List<TruckIssueCategory>> getTruckIssueCategories() async {
     var map = new Map<String, dynamic>();
-    map['key'] = API_KEY;
+    map['key'] = authKeyService.getAuthKey();
 
     final response =
         await http.post(Uri.parse(TRUCK_ISSUES_CATEGORIES_ENDPOINT), body: map);
@@ -57,7 +59,7 @@ class TruckIssuesService {
 
   Future<List<TruckIssueType>> getTruckIssueType() async {
     var map = new Map<String, dynamic>();
-    map['key'] = API_KEY;
+    map['key'] = authKeyService.getAuthKey();
 
     final response =
         await http.post(Uri.parse(TRUCK_ISSUES_TYPES_ENDPOINT), body: map);
@@ -79,8 +81,8 @@ class TruckIssuesService {
   }
 
   Future<List<TruckIssueRca>> getTruckIssueRCA() async {
-    final response =
-        await http.get(Uri.parse(TRUCK_ISSUES_RCA_LIST_ENDPOINT + API_KEY));
+    final response = await http.get(Uri.parse(
+        TRUCK_ISSUES_RCA_LIST_ENDPOINT + authKeyService.getAuthKey()));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -102,8 +104,8 @@ class TruckIssuesService {
     var map = new Map<String, dynamic>();
     map['truckRego'] = rego;
 
-    final response =
-        await http.get(Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT + API_KEY));
+    final response = await http.get(
+        Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT + authKeyService.getAuthKey()));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

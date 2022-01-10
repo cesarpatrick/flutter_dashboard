@@ -1,3 +1,27 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'variables.dart';
+
+Future<Webuser> authenticate(String userName, String password) async {
+  final response = await http.post(Uri.parse(Variables.getAuthUrl() + "/up"),
+      body: {
+        "username": userName,
+        "password": password,
+        "site": "salesportal"
+      });
+  print(Variables.getAuthUrl() + "/up");
+  print(response.statusCode);
+  print(response.body);
+  if (response.statusCode == 200) {
+    final responseJson = json.decode(response.body);
+    return Webuser.fromJson(responseJson);
+  } else {
+    throw Exception('Failed to authenticate');
+  }
+}
+
 class Webuser {
   int? userId;
   String? userName;

@@ -10,7 +10,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../../../util.dart';
+import '../../../helper/util.dart';
 import 'job_modal.dart';
 
 class RecentJobs extends StatelessWidget {
@@ -104,7 +104,7 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
     jobs.add(new JobInfo(
         icon: "assets/icons/truck-icon.svg",
         truck: list[i].truckId!.toString(),
-        date: Util.convertDate(list[i].createdOn!.toString().substring(0, 10)),
+        date: Util.formatDate(list[i].createdOn!.toString().substring(0, 10)),
         driver: list[i].webuserId!.toString(),
         issueType: list[i].truckIssueType!.toString(),
         message: list[i].issueNote!,
@@ -112,9 +112,9 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
         note: list[i].workshopNote!,
         rca: list[i].workshopStatus!.toString(),
         truckRequested:
-            Util.convertDate(list[i].createdOn!.toString().substring(0, 10)),
+            Util.formatDate(list[i].createdOn!.toString().substring(0, 10)),
         updated:
-            Util.convertDate(list[i].updatedOn!.toString().substring(0, 10))));
+            Util.formatDate(list[i].updatedOn!.toString().substring(0, 10))));
   }
 
   return jobs;
@@ -122,8 +122,6 @@ List<JobInfo> _getJobInfoList(List<TruckIssue> list) {
 
 DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
   TextStyle textStyle = TextStyle(fontSize: 10);
-
-  String truckRego = "";
 
   final TruckIssuesService apiTruckIssueService = TruckIssuesService();
   final TruckService apiTruckService = TruckService();
@@ -164,7 +162,6 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
                     if (snapshot.hasData) {
                       for (Truck t in trucks) {
                         if (jobInfo.truck! == t.id.toString()) {
-                          truckRego = t.truckRego!;
                           return Text(t.truckRego!,
                               style:
                                   TextStyle(color: Colors.red, fontSize: 10));
