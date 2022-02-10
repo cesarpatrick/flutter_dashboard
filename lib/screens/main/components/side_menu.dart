@@ -22,21 +22,25 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Inventory",
-            svgSrc: "assets/icons/menu_store.svg",
+            title: "Calendar",
+            svgSrc: "assets/icons/calendar_icon.svg",
             press: () {
               Navigator.pushNamed(context, '/inventory');
             },
           ),
           DrawerListTile(
-            title: "Reports",
-            svgSrc: "assets/icons/Documents.svg",
-            press: () {},
+            title: "Operations",
+            svgSrc: "assets/icons/operations_icon.svg",
+            press: () {
+              Navigator.pushNamed(context, '/inventory');
+            },
           ),
           DrawerListTile(
-            title: "Admin",
-            svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
+            title: "Inventory",
+            svgSrc: "assets/icons/menu_store.svg",
+            press: () {
+              Navigator.pushNamed(context, '/inventory');
+            },
           ),
           DrawerListTile(
             title: "Settings",

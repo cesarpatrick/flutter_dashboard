@@ -4,6 +4,7 @@ import 'package:admin/models/TruckIssue.dart';
 import 'package:admin/models/TruckIssueCategory.dart';
 import 'package:admin/models/TruckIssueRca.dart';
 import 'package:admin/models/TruckIssueType.dart';
+import 'package:admin/screens/main/components/progress_bar.dart';
 import 'package:admin/service/truck_issues_service.dart';
 import 'package:admin/service/truck_service.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -32,7 +33,7 @@ class RecentJobs extends StatelessWidget {
             list = snapshot.data!;
             jobs = _getJobInfoList(list);
           } else {
-            return Text('${snapshot.error}');
+            return ProgressBar();
           }
 
           return Container(
@@ -45,7 +46,7 @@ class RecentJobs extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Jobs",
+                  "Truck issues",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 SizedBox(
@@ -70,9 +71,6 @@ class RecentJobs extends StatelessWidget {
                       ),
                       DataColumn(
                         label: Text("Message", style: textStyle),
-                      ),
-                      DataColumn(
-                        label: Text("Note", style: textStyle),
                       ),
                       DataColumn(
                         label: Text("Requested", style: textStyle),
@@ -203,11 +201,6 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
           child: new SingleChildScrollView(
               child: new Column(children: <Widget>[
         Text(jobInfo.message!, style: textStyle, textAlign: TextAlign.justify)
-      ])))),
-      DataCell(new Container(
-          child: new SingleChildScrollView(
-              child: new Column(children: <Widget>[
-        Text(jobInfo.note!, style: textStyle, textAlign: TextAlign.justify)
       ])))),
       DataCell(Text(jobInfo.truckRequested!, style: textStyle)),
       DataCell(FutureBuilder<List<TruckIssueCategory>>(

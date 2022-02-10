@@ -1,6 +1,7 @@
 import 'package:admin/models/WorkshopStatus.dart';
 import 'package:admin/models/WorkshopStatusInfo.dart';
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/main/components/progress_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -95,7 +96,7 @@ class _WorkshopStatusCardGridViewState
             );
           }
 
-          throw Exception("No Data");
+          return ProgressBar();
         });
   }
 
