@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../main/components/header.dart';
 
-import 'components/recent_jobs.dart';
+import 'components/recent_truck_issues.dart';
 import 'components/job_details.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -29,7 +29,7 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       WorkshopStatusWidget(),
                       SizedBox(height: defaultPadding),
-                      RecentJobs(),
+                      RecentTruckIssues(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) JobDetails(),

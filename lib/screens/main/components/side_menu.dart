@@ -29,10 +29,10 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Operations",
-            svgSrc: "assets/icons/operations_icon.svg",
+            title: "Depot",
+            svgSrc: "assets/icons/recycling_icon.svg",
             press: () {
-              Navigator.pushNamed(context, '/inventory');
+              Navigator.pushNamed(context, '/depot');
             },
           ),
           DrawerListTile(

@@ -122,7 +122,7 @@ class _AuthState extends State<Auth> {
                                   _password = newValue;
                                   _authorisingLogin = true;
                                 });
-                                updatePrefs(_username!, _password!);
+                                userService.updatePrefs(_username!, _password!);
                                 authUser(_username!, _password!, context);
                               }
                             },
@@ -135,7 +135,7 @@ class _AuthState extends State<Auth> {
                             setState(() {
                               _authorisingLogin = true;
                             });
-                            updatePrefs(_username!, _password!);
+                            userService.updatePrefs(_username!, _password!);
                             authUser(_username!, _password!, context);
                           }
                         },
@@ -180,12 +180,6 @@ class _AuthState extends State<Auth> {
   void goToDashboard(String value) {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => MainDashboardScreen()));
-  }
-
-  void updatePrefs(String username, String password) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('username', username);
-    await prefs.setString('password', password);
   }
 
   void authUser(String username, String password, BuildContext context) async {

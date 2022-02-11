@@ -54,10 +54,6 @@ class ProfileCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          //   Image.asset(
-          //     "assets/images/profile_pic.png",
-          //     height: 38,
-          //   ),
           Icon(Icons.person),
           if (!Responsive.isMobile(context))
             Padding(
@@ -65,7 +61,6 @@ class ProfileCard extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
               child: Text("Cesar Gouveia"),
             ),
-          // Icon(Icons.keyboard_arrow_down),
         ],
       ),
     );

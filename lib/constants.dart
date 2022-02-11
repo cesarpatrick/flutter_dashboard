@@ -6,6 +6,9 @@ const bgColor = Color(0xFF212332);
 
 const defaultPadding = 16.0;
 
+const blackTextStyle =
+    TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold);
+
 const String API_KEY = "7a11c629-38a0-484b-86b0-a706bb1b4da0";
 
 const String WORKSHOP_STATUS_ENDPOINT =
@@ -30,3 +33,13 @@ const String TRUCK_ISSUES_RCA_LIST_ENDPOINT =
 const String LOGIN_ROUTE = "/";
 const String DASHBOARD_ROUTE = "/dashboard";
 const String INVENTORY_ROUTE = "/inventory";
+const String DEPOT_ROUTE = "/depot";
+const String DEPOT_CHECKLIST_ROUTE = "/checklist";
+
+//QUESTION TYPES
+const String INPUT_TEXT = "Input";
+const String SWITCH = "Switch";
+const String CHECKBOX_INPUT = "Checkbox";
+const String SELECT_INPUT = "Select";
+const String TEXT_AREA_INPUT = "TextArea";
+const String RADIO_BUTTON_INPUT = "RadioButton";

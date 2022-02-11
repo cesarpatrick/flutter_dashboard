@@ -7,44 +7,39 @@ class Variables {
     return 'https://beta.rdltr.com/';
   }
 
+  static String localhost() {
+    return 'http://localhost:8880/RDLWebService/ws/';
+  }
+
   static String baseUrl() {
     return prod();
-    // return beta();
   }
 
   static String getAuthUrl() {
     return baseUrl() + 'rdl-report-ws/ws/auth';
   }
 
-  static String getLocationUrl() {
-    return baseUrl() + 'rdl-pictures-ws2/ws/location';
+  static String getWorkshopStatusUrl() {
+    return baseUrl() + 'rdl-report-ws/ws/report/workshopstatus';
   }
 
-  static String getUploadUrl() {
-    return baseUrl() + 'rdl-pictures-ws2/ws/upload';
+  static String getTruckIssuesUrl() {
+    return baseUrl() + 'rdl-report-ws/ws/cache/truckissuetypes';
   }
 
-  static String getRunUrl() {
-    return baseUrl() + 'rdl-pictures-ws2/ws/run';
+  static String getTruckIssuesCategoriesUrl() {
+    return baseUrl() + 'rdl-report-ws/ws/cache/truckissuecategories';
   }
 
-  static String getTruckUrl() {
-    return baseUrl() + 'rdl-pictures-ws2/ws/trucks';
+  static String getTruckIssuesListUrl() {
+    return baseUrl() + 'rdl-pictures-ws2/ws/trucks/issue/all';
   }
 
-  static String getRosterUrl() {
-    return baseUrl() + 'rdl-pictures-ws2/ws/roster';
+  static String getTruckListUrl() {
+    return baseUrl() + 'rdl-report-ws/ws/cache/trucks';
   }
 
-  static String getReportUrl() {
-    return baseUrl() + 'rdl-pictures-ws2/ws/report';
-  }
-
-  static String getImageEndpoint(String fileId, String uz) {
-    return baseUrl() +
-        'rdlops/rubbishdirectops/DocumentManager?a=get-file&fid=' +
-        fileId +
-        '&uz=' +
-        uz;
+  static String getTruckIssuesRCAListUrl() {
+    return baseUrl() + 'rdlws51/ws/trucks/issue/status/list';
   }
 }

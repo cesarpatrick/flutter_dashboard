@@ -3,11 +3,15 @@ import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/page_not_found_screen.dart';
 import 'package:admin/screens/auth/auth.dart';
 import 'package:admin/screens/main/main_dashboard_screen.dart';
+import 'package:admin/screens/main/main_depot_screen.dart';
 import 'package:admin/screens/main/main_inventory_screen.dart';
 import 'package:admin/service/auth_key_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import 'screens/depot/depot_checklist_screen.dart';
+import 'screens/main/main_depot_checklist_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Workshop Panel',
+        title: 'Workshop Portal',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: bgColor,
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
@@ -58,6 +62,22 @@ class MyApp extends StatelessWidget {
                   ),
                 ],
                 child: MainInventoryScreen(),
+              ),
+          DEPOT_ROUTE: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (context) => MenuController(),
+                  ),
+                ],
+                child: MainDepotScreen(),
+              ),
+          DEPOT_CHECKLIST_ROUTE: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (context) => MenuController(),
+                  ),
+                ],
+                child: MainDepotCheckListScreen(),
               ),
         });
   }
