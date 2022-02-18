@@ -4,6 +4,7 @@ import 'package:admin/models/TruckIssue.dart';
 import 'package:admin/models/TruckIssueCategory.dart';
 import 'package:admin/models/TruckIssueRca.dart';
 import 'package:admin/models/TruckIssueType.dart';
+import 'package:admin/models/Variables.dart';
 import 'package:admin/service/auth_key_service.dart';
 import 'package:admin/service/truck_service.dart';
 import 'package:http/http.dart' as http;
@@ -14,9 +15,10 @@ class TruckIssuesService {
   final AuthKeyService authKeyService = AuthKeyService();
 
   Future<List<TruckIssue>> getList() async {
-    final response = await http.get(Uri.parse(TRUCK_ISSUES_LIST_ENDPOINT +
-        authKeyService.getAuthKey() +
-        "?start=2021-12-31&end=2022-01-10"));
+    final response = await http.get(Uri.parse(
+        Variables.getTruckIssuesListUrl() +
+            authKeyService.getAuthKey() +
+            "?start=2020-12-31&end=2021-01-10"));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -38,8 +40,32 @@ class TruckIssuesService {
     var map = new Map<String, dynamic>();
     map['key'] = authKeyService.getAuthKey();
 
-    final response =
-        await http.post(Uri.parse(TRUCK_ISSUES_CATEGORIES_ENDPOINT), body: map);
+    final response = await http
+        .post(Uri.parse(Variables.getTruckIssuesCategoriesUrl()), body: map);
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+
+      return parsed
+          .map<TruckIssueCategory>((json) => TruckIssueCategory.fromJson(json))
+          .toList();
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load truck issues categories');
+    }
+  }
+
+  Future<List<TruckIssueCategory>> getTruckIssueCategoriesById(int id) async {
+    var map = new Map<String, dynamic>();
+    map['key'] = authKeyService.getAuthKey();
+    map['id'] = authKeyService.getAuthKey();
+
+    final response = await http
+        .post(Uri.parse(Variables.getTruckIssuesCategoriesUrl()), body: map);
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -61,8 +87,8 @@ class TruckIssuesService {
     var map = new Map<String, dynamic>();
     map['key'] = authKeyService.getAuthKey();
 
-    final response =
-        await http.post(Uri.parse(TRUCK_ISSUES_TYPES_ENDPOINT), body: map);
+    final response = await http
+        .post(Uri.parse(Variables.getTruckIssuesTypeList()), body: map);
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -82,7 +108,7 @@ class TruckIssuesService {
 
   Future<List<TruckIssueRca>> getTruckIssueRCA() async {
     final response = await http.get(Uri.parse(
-        TRUCK_ISSUES_RCA_LIST_ENDPOINT + authKeyService.getAuthKey()));
+        Variables.getTruckIssuesRCAListUrl() + authKeyService.getAuthKey()));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -120,6 +146,72 @@ class TruckIssuesService {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load truck issues');
+    }
+  }
+
+  Future<TruckIssueType> getTruckIssueTypeById(String id) async {
+    final response = await http.post(Uri.parse(Variables.getTruckIssuesType() +
+        authKeyService.getAuthKey() +
+        '/' +
+        id));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      final responseJson = json.decode(response.body);
+
+      return TruckIssueType.fromJson(responseJson);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load the truck issues type');
+    }
+  }
+
+  Future<TruckIssueCategory> getTruckIssueTypeCategoryById(String id) async {
+    final response = await http.post(Uri.parse(
+        Variables.getTruckIssuesCategoriesUrl() +
+            authKeyService.getAuthKey() +
+            '/' +
+            id));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      final responseJson = json.decode(response.body);
+
+      return TruckIssueCategory.fromJson(responseJson);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load the truck issues type');
+    }
+  }
+
+  Future<TruckIssueRca> getTruckIssueTruckIssueRcaById(String id) async {
+    final response = await http.get(Uri.parse(Variables.getTruckIssuesRCAUrl() +
+        authKeyService.getAuthKey() +
+        '/' +
+        id));
+
+    print(Variables.getTruckIssuesRCAListUrl() +
+        authKeyService.getAuthKey() +
+        '/' +
+        id);
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      final responseJson = json.decode(response.body);
+
+      return TruckIssueRca.fromJson(responseJson);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load the truck issues type');
     }
   }
 }

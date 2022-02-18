@@ -1,6 +1,6 @@
 class Variables {
   static String prod() {
-    return 'https://rdltr.com:8999/';
+    return 'https://rdltr.com:8999/RDLWebService/ws/';
   }
 
   static String beta() {
@@ -12,34 +12,72 @@ class Variables {
   }
 
   static String baseUrl() {
-    return prod();
+    return localhost();
   }
 
   static String getAuthUrl() {
-    return baseUrl() + 'rdl-report-ws/ws/auth';
+    return baseUrl() + 'auth';
   }
 
   static String getWorkshopStatusUrl() {
-    return baseUrl() + 'rdl-report-ws/ws/report/workshopstatus';
+    return baseUrl() + 'report/workshopstatus/';
   }
 
   static String getTruckIssuesUrl() {
-    return baseUrl() + 'rdl-report-ws/ws/cache/truckissuetypes';
+    return baseUrl() + 'cache/truckissuetype/';
   }
 
   static String getTruckIssuesCategoriesUrl() {
-    return baseUrl() + 'rdl-report-ws/ws/cache/truckissuecategories';
+    return baseUrl() + 'cache/truckissuecategories/';
+  }
+
+  static String getTruckIssuesType() {
+    return baseUrl() + 'cache/truckissuetype/';
+  }
+
+  static String getTruckIssuesTypeList() {
+    return baseUrl() + 'cache/truckissuetypes/';
   }
 
   static String getTruckIssuesListUrl() {
-    return baseUrl() + 'rdl-pictures-ws2/ws/trucks/issue/all';
+    return baseUrl() + 'trucks/issue/all/';
   }
 
   static String getTruckListUrl() {
-    return baseUrl() + 'rdl-report-ws/ws/cache/trucks';
+    return baseUrl() + 'cache/trucks/';
   }
 
   static String getTruckIssuesRCAListUrl() {
-    return baseUrl() + 'rdlws51/ws/trucks/issue/status/list';
+    return baseUrl() + 'trucks/issue/status/list/';
+  }
+
+  static String getTruckIssuesRCAUrl() {
+    return baseUrl() + 'trucks/issue/status/';
+  }
+
+  static String getWebuserUrl() {
+    return baseUrl() + 'webuser/';
+  }
+
+  //Form Template Urls
+
+  static String getTemplateListUrl() {
+    return baseUrl() + 'formTemplate/list/';
+  }
+
+  static String getTemplateListFilterUrl() {
+    return baseUrl() + 'formTemplate/filter/';
+  }
+
+  //Form Record Urls
+
+  static String getFormRecordSaveUrl() {
+    return baseUrl() + 'formRecords/save/';
+  }
+
+  //Run Status Urls
+
+  static String getRunStatusUrl() {
+    return baseUrl() + 'report/runstatus/';
   }
 }

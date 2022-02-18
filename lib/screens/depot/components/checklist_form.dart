@@ -1,4 +1,12 @@
+import 'dart:convert';
+
 import 'package:admin/constants.dart';
+import 'package:admin/models/FormRecords.dart';
+import 'package:admin/models/Template.dart';
+import 'package:admin/models/json_to_form/JsonToForm.dart';
+import 'package:admin/screens/main/components/form_template_dropdown.dart';
+import 'package:admin/service/form_records_service.dart';
+import 'package:admin/service/template_service.dart';
 import 'package:flutter/material.dart';
 
 class CheckListForm extends StatefulWidget {
@@ -9,13 +17,25 @@ class CheckListForm extends StatefulWidget {
 }
 
 class _CheckListFormState extends State<CheckListForm> {
-  List<DropdownMenuItem<String>> departamentTypeDropDownItemList = List.empty();
+  TemplateService templateService = new TemplateService();
+  FormRecordsService formRecordsService = new FormRecordsService();
 
-  String _departamentDropdownValue = "";
+  ScrollController scrollController = ScrollController();
+
+  Template form = Template(name: "Select one", questions: []);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void update() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    Size _screen = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
 
     return Container(
         child: Column(
@@ -25,40 +45,55 @@ class _CheckListFormState extends State<CheckListForm> {
           Row(children: [
             Padding(padding: EdgeInsets.all(15), child: Text("Forms")),
             Flexible(
-                flex: 2,
                 child: Padding(
-                    padding: EdgeInsets.all(15),
-                    child: DropdownButton<String>(
-                      isExpanded: true,
-                      icon: Icon(
-                        // Add this
-                        Icons.arrow_drop_down, // Add this
-                        color: Colors.white, // Add this
-                      ),
-                      value: _departamentDropdownValue,
-                      style: const TextStyle(color: primaryColor),
-                      dropdownColor: Colors.white,
-                      underline: Container(
-                        height: 2,
-                        color: Colors.white,
-                      ),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _departamentDropdownValue = newValue!;
-                        });
-                      },
-                      items: departamentTypeDropDownItemList,
-                    ))),
-            Flexible(flex: 4, child: Container())
+              padding: EdgeInsets.all(15),
+              child: FormTemplateDropDown(form.id == null ? 0 : 0, (newValue) {
+                setState(() {
+                  form = newValue as Template;
+                });
+              }),
+            ))
           ]),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                  width: size.width / 1.4,
+                  height: size.height / 1.4,
                   padding: EdgeInsets.all(defaultPadding),
                   decoration: BoxDecoration(
-                    color: secondaryColor,
+                    color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ))
+                  ),
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    padding: EdgeInsets.all(defaultPadding),
+                    child: JsonToForm(
+                      form: jsonEncode(form),
+                      onChanged: (dynamic response) {
+                        setState(() {
+                          update();
+                          form = Template.fromJson(response);
+                        });
+                      },
+                      actionSave: (data) {
+                        formRecordsService.save(FormRecords(
+                            departament: form.departament,
+                            template: Template.fromJson(
+                                json.decode(jsonEncode(data)))));
+                      },
+                      buttonSave: Container(
+                        height: 40.0,
+                        color: Colors.blueAccent,
+                        child: const Center(
+                          child: Text("Submit",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                  )),
             ],
           )
         ]));

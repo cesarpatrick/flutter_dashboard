@@ -2,14 +2,15 @@ import 'package:admin/models/WorkshopStatus.dart';
 import 'package:admin/models/WorkshopStatusInfo.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/main/components/progress_bar.dart';
+import 'package:admin/service/truck_run_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import 'workshop_status_info_card.dart';
 import 'package:admin/service/workshop_status_service.dart';
 
-class TruckStatusWidget extends StatelessWidget {
-  const TruckStatusWidget({
+class TruckRunStatus extends StatelessWidget {
+  const TruckRunStatus({
     Key? key,
   }) : super(key: key);
 
@@ -29,12 +30,12 @@ class TruckStatusWidget extends StatelessWidget {
         ),
         SizedBox(height: defaultPadding),
         Responsive(
-          mobile: TruckStatusCardGridView(
+          mobile: TruckRunStatusCardGridView(
             crossAxisCount: _size.width < 650 ? 2 : 4,
             childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
           ),
-          tablet: TruckStatusCardGridView(),
-          desktop: TruckStatusCardGridView(
+          tablet: TruckRunStatusCardGridView(),
+          desktop: TruckRunStatusCardGridView(
             childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
           ),
         ),
@@ -43,8 +44,8 @@ class TruckStatusWidget extends StatelessWidget {
   }
 }
 
-class TruckStatusCardGridView extends StatefulWidget {
-  const TruckStatusCardGridView({
+class TruckRunStatusCardGridView extends StatefulWidget {
+  const TruckRunStatusCardGridView({
     Key? key,
     this.crossAxisCount = 6,
     this.childAspectRatio = 1,
@@ -54,17 +55,20 @@ class TruckStatusCardGridView extends StatefulWidget {
   final double childAspectRatio;
 
   @override
-  _TruckStatusCardGridViewState createState() =>
-      _TruckStatusCardGridViewState();
+  _TruckRunStatusCardGridViewState createState() =>
+      _TruckRunStatusCardGridViewState();
 }
 
-class _TruckStatusCardGridViewState extends State<TruckStatusCardGridView> {
+class _TruckRunStatusCardGridViewState
+    extends State<TruckRunStatusCardGridView> {
   @override
   Widget build(BuildContext context) {
-    final WorkshopStatusService api = WorkshopStatusService();
-    Future<WorkshopStatus> workshopStatus = api.getStatus();
-    return FutureBuilder<WorkshopStatus>(
-        future: workshopStatus,
+    final TruckRunService api = TruckRunService();
+
+    Future<List<TruckRunStatus>> runs = api.getTruckRunStatus();
+
+    return FutureBuilder<List<TruckRunStatus>>(
+        future: runs,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List list = _getWorkshopInfoList(snapshot.data!);

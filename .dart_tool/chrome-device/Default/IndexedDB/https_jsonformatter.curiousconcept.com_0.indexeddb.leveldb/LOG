@@ -1,0 +1,6 @@
+2022/02/15-14:05:27.941 332d9 Creating DB /tmp/flutter_tools.SURCJH/flutter_tools_chrome_device.GEAGRX/Default/IndexedDB/https_jsonformatter.curiousconcept.com_0.indexeddb.leveldb since it was missing.
+2022/02/15-14:05:27.954 332d9 Reusing MANIFEST /tmp/flutter_tools.SURCJH/flutter_tools_chrome_device.GEAGRX/Default/IndexedDB/https_jsonformatter.curiousconcept.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/02/15-14:05:34.137 3356c Level-0 table #5: started
+2022/02/15-14:05:34.140 3356c Level-0 table #5: 415 bytes OK
+2022/02/15-14:05:34.146 3356c Delete type=0 #3
+2022/02/15-14:05:34.147 3356c Manual compaction at level-0 from (begin) .. (end); will stop at (end)

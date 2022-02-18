@@ -14,7 +14,7 @@ class JobModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final TruckService apiTruckService = TruckService();
 
-    Future<List<Truck>> listTrucks = apiTruckService.getTrucks();
+    Future<Truck> truck = apiTruckService.getTruckById(jobInfo.truck!);
 
     return Dialog(
       backgroundColor: Colors.white,
@@ -28,20 +28,14 @@ class JobModal extends StatelessWidget {
             children: [
               Chip(
                   backgroundColor: Color.fromRGBO(33, 35, 50, 10),
-                  label: FutureBuilder<List<Truck>>(
-                      future: listTrucks,
+                  label: FutureBuilder<Truck>(
+                      future: truck,
                       builder: (context, snapshot) {
-                        List<Truck> trucks = snapshot.data!;
-
                         if (snapshot.hasData) {
-                          for (Truck t in trucks) {
-                            if (jobInfo.truck! == t.id.toString()) {
-                              return Text("Job for " + t.truckRego!);
-                            }
-                          }
+                          return Text("Job for " + snapshot.data!.truckRego!);
+                        } else {
+                          return const SizedBox();
                         }
-
-                        return const SizedBox();
                       })),
               SizedBox(height: 20),
               Column(

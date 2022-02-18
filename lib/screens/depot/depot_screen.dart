@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 import 'components/depot_status.dart';
-import 'components/truck_status.dart';
+import 'components/truck_run_status.dart';
 
 class DepotScreen extends StatelessWidget {
   @override
@@ -28,7 +28,7 @@ class DepotScreen extends StatelessWidget {
                     children: [
                       DepotStatus(),
                       SizedBox(height: defaultPadding),
-                      TruckStatus(),
+                      TruckRunStatusScreen(),
                       SizedBox(height: defaultPadding),
                       TrucksLocation(),
                       if (Responsive.isMobile(context))

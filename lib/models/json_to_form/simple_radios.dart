@@ -86,11 +86,14 @@ class _SimpleRadios extends State<SimpleRadios> {
       );
     }
     return new Container(
-      margin: new EdgeInsets.only(top: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: radios,
-      ),
-    );
+        margin: new EdgeInsets.only(top: 5.0),
+        child: Theme(
+          data: Theme.of(context).copyWith(
+              unselectedWidgetColor: Colors.black, disabledColor: Colors.black),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: radios,
+          ),
+        ));
   }
 }

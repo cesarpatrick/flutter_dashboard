@@ -56,57 +56,62 @@ class _SimpleSelect extends State<SimpleSelect> {
     }
 
     return new Container(
-      margin: new EdgeInsets.only(top: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          label,
-          new DropdownButtonFormField<String>(
-            icon: Icon(
-              Icons.arrow_drop_down,
-              color: Colors.black,
-            ),
-            decoration: new InputDecoration(
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+        margin: new EdgeInsets.only(top: 5.0),
+        child: Theme(
+          data: Theme.of(context).copyWith(
+              unselectedWidgetColor: Colors.black, disabledColor: Colors.black),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              label,
+              new DropdownButtonFormField<String>(
+                dropdownColor: Colors.white,
+                icon: Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black,
                 ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                )),
-            hint: new Text("Select a user"),
-            value: selectValue,
-            onChanged: (String? newValue) {
-              setState(() {
-                item['value'] = newValue;
-                widget.onChange!(widget.position, newValue);
-              });
-            },
-            validator: (value) {
-              if (widget.validations.containsKey(item['key'])) {
-                return widget.validations[item['key']](item, value);
-              }
+                decoration: new InputDecoration(
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    )),
+                hint: new Text("Select a user"),
+                value: selectValue,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    item['value'] = newValue;
+                    widget.onChange!(widget.position, newValue);
+                  });
+                },
+                validator: (value) {
+                  if (widget.validations.containsKey(item['key'])) {
+                    return widget.validations[item['key']](item, value);
+                  }
 
-              if (item.containsKey('required')) {
-                if (item['required'] == true ||
-                    item['required'] == 'True' ||
-                    item['required'] == 'true') {
-                  return isRequired(item, value);
-                }
-              }
-              return null;
-            },
-            items: item['items'].map<DropdownMenuItem<String>>((dynamic data) {
-              return DropdownMenuItem<String>(
-                value: data['value'],
-                child: new Text(
-                  data['label'],
-                  style: new TextStyle(color: Colors.black),
-                ),
-              );
-            }).toList(),
+                  if (item.containsKey('required')) {
+                    if (item['required'] == true ||
+                        item['required'] == 'True' ||
+                        item['required'] == 'true') {
+                      return isRequired(item, value);
+                    }
+                  }
+                  return null;
+                },
+                items:
+                    item['items'].map<DropdownMenuItem<String>>((dynamic data) {
+                  return DropdownMenuItem<String>(
+                    value: data['value'],
+                    child: new Text(
+                      data['label'],
+                      style: new TextStyle(color: Colors.black),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }

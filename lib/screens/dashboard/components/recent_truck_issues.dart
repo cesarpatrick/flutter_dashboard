@@ -4,9 +4,11 @@ import 'package:admin/models/TruckIssue.dart';
 import 'package:admin/models/TruckIssueCategory.dart';
 import 'package:admin/models/TruckIssueRca.dart';
 import 'package:admin/models/TruckIssueType.dart';
+import 'package:admin/models/WebUser.dart';
 import 'package:admin/screens/main/components/progress_bar.dart';
 import 'package:admin/service/truck_issues_service.dart';
 import 'package:admin/service/truck_service.dart';
+import 'package:admin/service/user_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
@@ -123,16 +125,17 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
 
   final TruckIssuesService apiTruckIssueService = TruckIssuesService();
   final TruckService apiTruckService = TruckService();
+  final UserService userService = UserService();
 
-  Future<List<TruckIssueCategory>> listCategories =
-      apiTruckIssueService.getTruckIssueCategories();
-  Future<List<TruckIssueType>> listTypes =
-      apiTruckIssueService.getTruckIssueType();
+  Future<TruckIssueCategory> category =
+      apiTruckIssueService.getTruckIssueTypeCategoryById(jobInfo.category!);
+  Future<TruckIssueType> truckIssueType =
+      apiTruckIssueService.getTruckIssueTypeById(jobInfo.issueType!);
+  Future<TruckIssueRca> issueRca =
+      apiTruckIssueService.getTruckIssueTruckIssueRcaById(jobInfo.rca!);
+  Future<Webuser> driver = userService.getUserById(jobInfo.driver!);
 
-  Future<List<TruckIssueRca>> listRca = apiTruckIssueService.getTruckIssueRCA();
-
-  Future<List<Truck>> listTrucks = apiTruckService.getTrucks();
-
+  Future<Truck> truck = apiTruckService.getTruckById(jobInfo.truck!);
   return DataRow(
     cells: [
       DataCell(
@@ -152,24 +155,15 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
                 width: 10,
                 height: 10,
               ),
-              FutureBuilder<List<Truck>>(
-                  future: listTrucks,
+              FutureBuilder<Truck>(
+                  future: truck,
                   builder: (context, snapshot) {
-                    List<Truck> trucks = snapshot.data!;
-
                     if (snapshot.hasData) {
-                      for (Truck t in trucks) {
-                        if (jobInfo.truck! == t.id.toString()) {
-                          return Text(t.truckRego!,
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 10));
-                        }
-                      }
+                      return Text(snapshot.data!.truckRego!,
+                          style: TextStyle(color: Colors.red, fontSize: 10));
                     } else {
-                      return ProgressBar();
+                      return const SizedBox();
                     }
-
-                    return const SizedBox();
                   }),
             ],
           ), onTap: () {
@@ -180,26 +174,29 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
             });
       }),
       DataCell(Text(jobInfo.date!, style: textStyle)),
-      DataCell(Text(jobInfo.driver!, style: textStyle)),
-      DataCell(FutureBuilder<List<TruckIssueType>>(
-          future: listTypes,
+      DataCell(FutureBuilder<Webuser>(
+          future: driver,
           builder: (context, snapshot) {
-            List<TruckIssueType> types = snapshot.data!;
-
             if (snapshot.hasData) {
-              for (TruckIssueType c in types) {
-                if (jobInfo.issueType! == c.id.toString()) {
-                  return Text(
-                    c.name!,
-                    style: textStyle,
-                  );
-                }
-              }
+              return Text(
+                snapshot.data!.firstName! + ' ' + snapshot.data!.lastName!,
+                style: textStyle,
+              );
             } else {
-              return ProgressBar();
+              return SizedBox();
             }
-
-            return const SizedBox();
+          })),
+      DataCell(FutureBuilder<TruckIssueType>(
+          future: truckIssueType,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text(
+                snapshot.data!.name!,
+                style: textStyle,
+              );
+            } else {
+              return SizedBox();
+            }
           })),
       DataCell(new Container(
           child: new SingleChildScrollView(
@@ -207,39 +204,23 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
         Text(jobInfo.message!, style: textStyle, textAlign: TextAlign.justify)
       ])))),
       DataCell(Text(jobInfo.truckRequested!, style: textStyle)),
-      DataCell(FutureBuilder<List<TruckIssueCategory>>(
-          future: listCategories,
+      DataCell(FutureBuilder<TruckIssueCategory>(
+          future: category,
           builder: (context, snapshot) {
-            List<TruckIssueCategory> categories = snapshot.data!;
-
             if (snapshot.hasData) {
-              for (TruckIssueCategory c in categories) {
-                if (jobInfo.category! == c.id.toString()) {
-                  return Text(c.truckIssueCategory!, style: textStyle);
-                }
-              }
+              return Text(snapshot.data!.truckIssueCategory!, style: textStyle);
             } else {
-              return ProgressBar();
+              return const SizedBox();
             }
-
-            return const SizedBox();
           })),
-      DataCell(FutureBuilder<List<TruckIssueRca>>(
-          future: listRca,
+      DataCell(FutureBuilder<TruckIssueRca>(
+          future: issueRca,
           builder: (context, snapshot) {
-            List<TruckIssueRca> rcaList = snapshot.data!;
-
             if (snapshot.hasData) {
-              for (TruckIssueRca c in rcaList) {
-                if (jobInfo.rca! == c.id.toString()) {
-                  return Text(c.type!, style: textStyle);
-                }
-              }
+              return Text(snapshot.data!.type!, style: textStyle);
             } else {
-              return ProgressBar();
+              return const SizedBox();
             }
-
-            return const SizedBox();
           })),
       DataCell(Text(jobInfo.updated!, style: textStyle)),
     ],

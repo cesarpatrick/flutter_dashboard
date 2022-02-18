@@ -54,7 +54,7 @@ class _SimpleSwitch extends State<SimpleSwitch> {
     return new Container(
       margin: new EdgeInsets.only(top: 5.0),
       child: new Row(children: <Widget>[
-        Text(item['label'], style: blackTextStyle),
+        Expanded(child: Text(item['label'], style: blackTextStyle)),
         new Switch(
           value: switchValue,
           inactiveTrackColor: Colors.grey,
@@ -66,7 +66,7 @@ class _SimpleSwitch extends State<SimpleSwitch> {
               widget.onChange!(widget.position, value);
             });
           },
-        ),
+        )
       ]),
     );
   }

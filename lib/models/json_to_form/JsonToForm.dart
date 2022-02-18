@@ -111,6 +111,16 @@ class _CoreFormState extends State<JsonToForm> {
           validations: widget.validations,
           keyboardTypes: widget.keyboardTypes,
         ));
+
+        listWidget.add(Column(children: [
+          Divider(
+            thickness: 1.5, // thickness of the line
+            indent: 0, // empty space to the leading edge of divider.
+            endIndent: 0, // empty space to the trailing edge of the divider.
+            color: Colors.black54, // The color to use when painting the line.
+            height: 3, // The divider's height extent.
+          ),
+        ]));
       }
 
       if (item['type'] == "Checkbox") {
@@ -187,6 +197,15 @@ class _CoreFormState extends State<JsonToForm> {
               value;
           break;
         case RADIO_BUTTON_INPUT:
+          template.questions[position].field!.value = value;
+          break;
+        case SELECT_INPUT:
+          template.questions[position].field!.value = value;
+          break;
+        case INPUT_TEXT:
+          template.questions[position].field!.value = value;
+          break;
+        case TEXT_AREA_INPUT:
           template.questions[position].field!.value = value;
           break;
         default:

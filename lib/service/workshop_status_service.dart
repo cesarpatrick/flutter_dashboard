@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:admin/models/Variables.dart';
 import 'package:admin/service/auth_key_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:admin/models/WorkshopStatus.dart';
-import '../../../constants.dart';
 
 class WorkshopStatusService {
   final AuthKeyService authKeyService = AuthKeyService();
 
   Future<WorkshopStatus> getStatus() async {
-    final response = await http.post(
-        Uri.parse(WORKSHOP_STATUS_ENDPOINT + authKeyService.getAuthKey()));
+    final response = await http.post(Uri.parse(
+        Variables.getWorkshopStatusUrl() + authKeyService.getAuthKey()));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

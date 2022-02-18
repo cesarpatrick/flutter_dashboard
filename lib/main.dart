@@ -9,8 +9,6 @@ import 'package:admin/service/auth_key_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
-import 'screens/depot/depot_checklist_screen.dart';
 import 'screens/main/main_depot_checklist_screen.dart';
 
 void main() {
