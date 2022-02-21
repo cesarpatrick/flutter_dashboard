@@ -20,7 +20,7 @@ class _TruckRunStatusScreenState extends State<TruckRunStatusScreen> {
       children: [
         SizedBox(height: defaultPadding),
         Container(
-          child: TruckRunStatus(),
+          child: TruckRunStatusWidget(),
           width: _screen.width,
         )
       ],

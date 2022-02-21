@@ -27,9 +27,12 @@ class TruckRunStatus {
 
   factory TruckRunStatus.fromJson(Map<String, dynamic> json) => TruckRunStatus(
         runName: json["runName"],
-        rubbishRunKey: RubbishRunKey.fromJson(json["rubbishRunKey"]),
-        wu: Wu.fromJson(json["wu"]),
-        driverAndTruck: json["driverAndTruck"],
+        rubbishRunKey: json["rubbishRunKey"] == null
+            ? null
+            : RubbishRunKey.fromJson(json["rubbishRunKey"]),
+        wu: json["wu"] == null ? null : Wu.fromJson(json["wu"]),
+        driverAndTruck:
+            json["driverAndTruck"] == null ? null : json["driverAndTruck"],
         stops: json["stops"],
         count: json["count"],
         binCountin240LEquiv: json["binCountin240LEquiv"].toDouble(),
@@ -54,7 +57,8 @@ class RubbishRunKey {
   int rubbishRunId;
 
   factory RubbishRunKey.fromJson(Map<String, dynamic> json) => RubbishRunKey(
-        rubbishRunId: json["rubbishRunId"],
+        rubbishRunId:
+            json["rubbishRunId"] == null ? null : json["rubbishRunId"],
       );
 
   Map<String, dynamic> toJson() => {

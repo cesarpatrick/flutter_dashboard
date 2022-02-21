@@ -1,18 +1,15 @@
-import 'package:admin/models/WorkshopStatus.dart';
-import 'package:admin/models/WorkshopStatusInfo.dart';
+import 'package:admin/models/TruckRunStatus.dart';
+import 'package:admin/models/TruckRunStatusInfo.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/main/components/progress_bar.dart';
 import 'package:admin/service/truck_run_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import 'workshop_status_info_card.dart';
-import 'package:admin/service/workshop_status_service.dart';
+import 'truck_run_status_info_card.dart';
 
-class TruckRunStatus extends StatelessWidget {
-  const TruckRunStatus({
-    Key? key,
-  }) : super(key: key);
+class TruckRunStatusWidget extends StatelessWidget {
+  const TruckRunStatusWidget() : super();
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +43,9 @@ class TruckRunStatus extends StatelessWidget {
 
 class TruckRunStatusCardGridView extends StatefulWidget {
   const TruckRunStatusCardGridView({
-    Key? key,
     this.crossAxisCount = 6,
     this.childAspectRatio = 1,
-  }) : super(key: key);
+  });
 
   final int crossAxisCount;
   final double childAspectRatio;
@@ -61,17 +57,16 @@ class TruckRunStatusCardGridView extends StatefulWidget {
 
 class _TruckRunStatusCardGridViewState
     extends State<TruckRunStatusCardGridView> {
+  final TruckRunService api = TruckRunService();
+
   @override
   Widget build(BuildContext context) {
-    final TruckRunService api = TruckRunService();
-
     Future<List<TruckRunStatus>> runs = api.getTruckRunStatus();
-
     return FutureBuilder<List<TruckRunStatus>>(
         future: runs,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List list = _getWorkshopInfoList(snapshot.data!);
+            List list = _getRunStatusInfoList(snapshot.data);
             return GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -83,7 +78,7 @@ class _TruckRunStatusCardGridViewState
                 childAspectRatio: widget.childAspectRatio,
               ),
               itemBuilder: (context, index) =>
-                  TruckStatusCard(info: list[index]),
+                  TruckRunStatusInfoCard(info: list[index]),
             );
           }
 
@@ -91,82 +86,32 @@ class _TruckRunStatusCardGridViewState
         });
   }
 
-  List _getWorkshopInfoList(WorkshopStatus status) {
-    List workshopInfo = [
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.numberOfIssuesReportedLast7Days,
-          color: Colors.blue,
-          title: 'G1',
-          icon: Icon(Icons.liquor_outlined, color: Colors.blue)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.numberOfIssuesFixedLast7Days,
-          color: Colors.blue,
-          title: 'G2',
-          icon: Icon(Icons.liquor_outlined, color: Colors.blue)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.numberOfTrucksOffRoad,
-          color: Colors.blue,
-          title: 'G3',
-          icon: Icon(Icons.liquor_outlined, color: Colors.blue)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.incompleteIssues,
-          color: Colors.green,
-          title: 'V1',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.numberOfTrucksOffRoad,
-          color: Colors.green,
-          title: 'V2',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.incompleteIssues,
-          color: Colors.green,
-          title: 'V3',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.incompleteIssues,
-          color: Colors.green,
-          title: 'V4',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.numberOfTrucksOffRoad,
-          color: Colors.green,
-          title: 'V5',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.incompleteIssues,
-          color: Colors.green,
-          title: 'V6',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.incompleteIssues,
-          color: Colors.green,
-          title: 'V7',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.numberOfTrucksOffRoad,
-          color: Colors.green,
-          title: 'V8',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green)),
-      WorkshopStatusInfo(
-          truckInService: [],
-          value: status.incompleteIssues,
-          color: Colors.green,
-          title: 'V9',
-          icon: Icon(Icons.change_circle_outlined, color: Colors.green))
-    ];
+  List _getRunStatusInfoList(List<TruckRunStatus>? listRunStatus) {
+    List runStatusInfo = [];
 
-    return workshopInfo;
+    for (TruckRunStatus status in listRunStatus!) {
+      if (status.runName!.startsWith('Glass') && status.count! > 0) {
+        runStatusInfo.add(TruckRunStatusInfo(
+            runName: status.runName,
+            color: Colors.blue,
+            truckRego: status.driverAndTruck,
+            userName: status.wu == null ? '' : status.wu!.userName!,
+            stops: status.stops,
+            count: status.count,
+            icon: Icon(Icons.wine_bar, color: Colors.blue)));
+      }
+
+      if (status.runName!.startsWith('Depot')) {
+        runStatusInfo.add(TruckRunStatusInfo(
+            runName: status.runName,
+            color: Colors.yellow,
+            truckRego: status.driverAndTruck,
+            userName: status.wu == null ? '' : status.wu!.userName!,
+            stops: status.stops,
+            count: status.count,
+            icon: Icon(Icons.cached, color: Colors.yellow)));
+      }
+    }
+    return runStatusInfo;
   }
 }

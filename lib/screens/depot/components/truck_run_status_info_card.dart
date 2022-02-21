@@ -1,22 +1,19 @@
-import 'package:admin/models/WorkshopStatusInfo.dart';
+import 'package:admin/models/TruckRunStatusInfo.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class TruckStatusCard extends StatelessWidget {
-  const TruckStatusCard({
+class TruckRunStatusInfoCard extends StatelessWidget {
+  const TruckRunStatusInfoCard({
     Key? key,
     required this.info,
   }) : super(key: key);
 
-  final WorkshopStatusInfo info;
+  final TruckRunStatusInfo info;
 
   @override
   Widget build(BuildContext context) {
-    Size _screen = MediaQuery.of(context).size;
-
     return Container(
-      width: _screen.width / 8,
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         color: secondaryColor,
@@ -37,38 +34,53 @@ class TruckStatusCard extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 child: info.icon,
-              ),
-              SizedBox(width: 20),
+              )
+            ],
+          ),
+          Container(
+            child: Text(
+              info.runName!,
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Text(
-                info.title!,
-                style: TextStyle(fontSize: 20),
+                "${info.stops}/${info.count}",
+                style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    "${info.userName}",
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  )
+                ],
               )
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "${info.value}/${info.value}",
-                style: TextStyle(fontSize: 20),
-                textAlign: TextAlign.center,
-              ),
+              Column(
+                children: [
+                  Text(
+                    "${info.truckRego!.split(':')[1]}",
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              )
             ],
-          ),
-          Container(
-            child: Text(
-              "Navdeep",
-              style: TextStyle(fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            child: Text(
-              "KRN534",
-              style: TextStyle(fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
           ),
         ],
       ),
