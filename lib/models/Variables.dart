@@ -80,4 +80,13 @@ class Variables {
   static String getRunStatusUrl() {
     return baseUrl() + 'report/runstatus/';
   }
+
+  // Depot Dahsboard
+  static String getDepotDashboardInfo() {
+    return baseUrl() + 'depotDashboard/';
+  }
+
+  static String getDepotDashboardSave() {
+    return baseUrl() + 'depotDashboard/save/';
+  }
 }

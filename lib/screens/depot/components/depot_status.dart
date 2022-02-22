@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../responsive.dart';
 import 'depot_roster.dart';
+import 'notes_editor_modal.dart';
 
 class DepotStatus extends StatefulWidget {
   const DepotStatus({Key? key}) : super(key: key);
@@ -47,9 +48,28 @@ class _DepotStatusState extends State<DepotStatus> {
               "Roster",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            Text(
-              "Notes",
-              style: Theme.of(context).textTheme.subtitle1,
+            Row(
+              children: [
+                Text(
+                  "Notes",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                new IconButton(
+                  color: Colors.blueAccent,
+                  icon: new Icon(Icons.create),
+                  highlightColor: Colors.pink,
+                  iconSize: 16,
+                  onPressed: () {
+                    setState(() {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return NotesEditorModal();
+                          });
+                    });
+                  },
+                ),
+              ],
             ),
           ],
         ),

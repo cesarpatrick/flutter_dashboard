@@ -50,12 +50,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "csslib",
-      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/csslib-0.15.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.1"
-    },
-    {
       "name": "cupertino_icons",
       "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.4",
       "packageUri": "lib/",
@@ -122,12 +116,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "flutter_html",
-      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_html-0.8.2",
-      "packageUri": "lib/",
-      "languageVersion": "1.19"
-    },
-    {
       "name": "flutter_inappwebview",
       "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-5.3.2",
       "packageUri": "lib/",
@@ -186,12 +174,6 @@
       "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps-3.4.5",
       "packageUri": "lib/",
       "languageVersion": "2.3"
-    },
-    {
-      "name": "html",
-      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/html-0.13.4+2",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
     },
     {
       "name": "html_editor_enhanced",
@@ -464,12 +446,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "utf",
-      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/utf-0.9.0+5",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "vector_math",
       "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1",
       "packageUri": "lib/",
@@ -506,7 +482,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-21T02:38:56.978098Z",
+  "generated": "2022-02-22T02:17:15.780899Z",
   "generator": "pub",
   "generatorVersion": "2.15.0"
 }

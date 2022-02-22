@@ -1,5 +1,4 @@
 import 'package:admin/constants.dart';
-import 'package:admin/screens/dashboard/components/workshop_status.dart';
 import 'package:flutter/material.dart';
 
 import 'truck_status_widget.dart';
