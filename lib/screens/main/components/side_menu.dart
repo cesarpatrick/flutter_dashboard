@@ -43,7 +43,7 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Settings",
+            title: "Truck History",
             svgSrc: "assets/icons/menu_setting.svg",
             press: () {},
           ),
