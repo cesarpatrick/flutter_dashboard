@@ -53,7 +53,7 @@ class WorkShopStatusCard extends StatelessWidget {
             children: [
               Text(
                 "${info.value}",
-                style: TextStyle(fontSize: 14),
+                style: TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
             ],

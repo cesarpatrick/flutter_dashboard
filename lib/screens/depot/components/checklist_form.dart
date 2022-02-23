@@ -58,9 +58,8 @@ class _CheckListFormState extends State<CheckListForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  width: size.width / 1.4,
-                  height: size.height / 1.4,
-                  padding: EdgeInsets.all(defaultPadding),
+                  width: size.width / 1.25,
+                  height: size.height / 1.3,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
