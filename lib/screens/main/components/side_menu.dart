@@ -1,3 +1,5 @@
+import 'package:admin/models/WebUser.dart';
+import 'package:admin/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,6 +10,8 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserService userService = UserService();
+
     return Drawer(
       child: ListView(
         children: [
@@ -47,6 +51,15 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_setting.svg",
             press: () {},
           ),
+          DrawerListTile(
+            title: "Sign Out",
+            svgSrc: "assets/icons/exit_icon.svg",
+            press: () {
+              userService.setUser(Webuser());
+              userService.updatePrefs("", "");
+              userService.checkUserLoggedIn(context);
+            },
+          )
         ],
       ),
     );
