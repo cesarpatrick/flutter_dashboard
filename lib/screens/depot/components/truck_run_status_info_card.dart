@@ -74,7 +74,7 @@ class TruckRunStatusInfoCard extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "${info.truckRego!.split(':')[1]}",
+                    "${info.truckRego == null ? "" : info.truckRego!.split(':')[1]}",
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   )
