@@ -16,10 +16,11 @@ class _ProgressBarState extends State<ProgressBar>
   void initState() {
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 10),
+      duration: const Duration(seconds: 3),
     )..addListener(() {
         setState(() {});
       });
+    controller.repeat(reverse: true);
     super.initState();
   }
 
@@ -33,11 +34,11 @@ class _ProgressBarState extends State<ProgressBar>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                  width: 10,
-                  height: 10,
+                  width: 50,
+                  height: 50,
                   child: CircularProgressIndicator(
-                    strokeWidth: 10,
-                    color: Colors.red,
+                    semanticsLabel: 'Loading..',
+                    color: Colors.blue,
                     value: controller.value,
                   ))
             ]));
