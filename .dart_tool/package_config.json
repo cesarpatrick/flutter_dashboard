@@ -446,6 +446,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/uuid-3.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1",
       "packageUri": "lib/",
@@ -454,6 +460,36 @@
     {
       "name": "visibility_detector",
       "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/visibility_detector-0.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "webview_flutter",
+      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-2.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "webview_flutter_android",
+      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-2.8.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "webview_flutter_platform_interface",
+      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_platform_interface-1.8.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "webview_flutter_wkwebview",
+      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.7.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "webviewx",
+      "rootUri": "file:///home/cesar/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/webviewx-0.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -482,7 +518,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-22T02:17:15.780899Z",
+  "generated": "2022-02-25T00:29:58.205759Z",
   "generator": "pub",
   "generatorVersion": "2.15.0"
 }

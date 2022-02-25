@@ -14,14 +14,14 @@ class _ProgressBarState extends State<ProgressBar>
 
   @override
   void initState() {
+    super.initState();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
     )..addListener(() {
-        setState(() {});
+        //  setState(() {});
       });
-    controller.repeat(reverse: true);
-    super.initState();
+    controller.repeat(reverse: false);
   }
 
   @override
@@ -37,7 +37,6 @@ class _ProgressBarState extends State<ProgressBar>
                   width: 50,
                   height: 50,
                   child: CircularProgressIndicator(
-                    semanticsLabel: 'Loading..',
                     color: Colors.blue,
                     value: controller.value,
                   ))

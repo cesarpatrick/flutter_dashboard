@@ -1,21 +1,32 @@
 import 'package:admin/models/JobInfo.dart';
-import 'package:admin/models/Truck.dart';
 import 'package:admin/service/truck_service.dart';
 import 'package:flutter/material.dart';
 
 import 'truck_issue_category_dropdown.dart';
 import 'truck_issue_type_dropdown.dart';
 
-class JobModal extends StatelessWidget {
+class JobModal extends StatefulWidget {
   final JobInfo jobInfo;
   const JobModal(this.jobInfo);
 
   @override
+  _JobModalState createState() => _JobModalState();
+}
+
+class _JobModalState extends State<JobModal> {
+  final TruckService apiTruckService = TruckService();
+  String truckRego = "";
+
+  @override
+  void initState() {
+    super.initState();
+    apiTruckService.getTruckById(widget.jobInfo.truck!).then((result) {
+      truckRego = result.truckRego!;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TruckService apiTruckService = TruckService();
-
-    Future<Truck> truck = apiTruckService.getTruckById(jobInfo.truck!);
-
     return Dialog(
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -28,15 +39,7 @@ class JobModal extends StatelessWidget {
             children: [
               Chip(
                   backgroundColor: Color.fromRGBO(33, 35, 50, 10),
-                  label: FutureBuilder<Truck>(
-                      future: truck,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Text("Job for " + snapshot.data!.truckRego!);
-                        } else {
-                          return const SizedBox();
-                        }
-                      })),
+                  label: Text("Job for " + truckRego)),
               SizedBox(height: 20),
               Column(
                 children: [
@@ -55,8 +58,9 @@ class JobModal extends StatelessWidget {
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
-                                    text: jobInfo.date!.substring(0, 10) +
-                                        '      ',
+                                    text:
+                                        widget.jobInfo.date!.substring(0, 10) +
+                                            '      ',
                                     style: TextStyle(color: Colors.black)),
                                 TextSpan(
                                     text: 'Truck' + '   ',
@@ -64,7 +68,7 @@ class JobModal extends StatelessWidget {
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
-                                    text: jobInfo.truck! + '      ',
+                                    text: truckRego + '      ',
                                     style: TextStyle(color: Colors.black)),
                                 TextSpan(
                                     text: 'Reported By' + '    ',
@@ -72,7 +76,7 @@ class JobModal extends StatelessWidget {
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
-                                    text: jobInfo.driver,
+                                    text: widget.jobInfo.driver,
                                     style: TextStyle(color: Colors.black))
                               ],
                             ),
@@ -102,7 +106,8 @@ class JobModal extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 20, width: 50),
-                          TruckIssueTypeDropDown(int.parse(jobInfo.issueType!))
+                          TruckIssueTypeDropDown(
+                              int.parse(widget.jobInfo.issueType!))
                         ],
                       )),
                 ],
@@ -133,7 +138,7 @@ class JobModal extends StatelessWidget {
                               width: 450,
                               child: TextField(
                                 controller: TextEditingController()
-                                  ..text = jobInfo.message!,
+                                  ..text = widget.jobInfo.message!,
                                 readOnly: true,
                                 style: TextStyle(color: Colors.black),
                                 decoration: new InputDecoration(
@@ -197,7 +202,7 @@ class JobModal extends StatelessWidget {
                               style: DefaultTextStyle.of(context).style,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: jobInfo.date!.substring(0, 10),
+                                    text: widget.jobInfo.date!.substring(0, 10),
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold))
@@ -241,7 +246,8 @@ class JobModal extends StatelessWidget {
                               style: DefaultTextStyle.of(context).style,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: jobInfo.updated!.substring(0, 10),
+                                    text: widget.jobInfo.updated!
+                                        .substring(0, 10),
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold))
@@ -278,7 +284,7 @@ class JobModal extends StatelessWidget {
                               width: 450,
                               child: TextField(
                                 controller: TextEditingController()
-                                  ..text = jobInfo.note!,
+                                  ..text = widget.jobInfo.note!,
                                 readOnly: true,
                                 style: TextStyle(color: Colors.black),
                                 decoration: new InputDecoration(
@@ -335,7 +341,7 @@ class JobModal extends StatelessWidget {
                           ),
                           SizedBox(height: 20, width: 50),
                           TruckIssueCategoriesDropDown(
-                              int.parse(jobInfo.category!))
+                              int.parse(widget.jobInfo.category!))
                         ],
                       )),
                 ],

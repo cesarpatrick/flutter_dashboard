@@ -1,5 +1,6 @@
 import 'package:admin/constants.dart';
 import 'package:admin/screens/main/components/get_map_widget.dart';
+import 'package:admin/screens/main/components/truck_tracker_widget.dart';
 import 'package:flutter/material.dart';
 
 class TrucksLocation extends StatefulWidget {
@@ -24,7 +25,7 @@ class _TrucksLocationState extends State<TrucksLocation> {
         ),
         SizedBox(height: defaultPadding),
         Container(
-          child: getMap(),
+          child: TruckTrackerWidget(),
           width: _screen.width,
           height: _screen.height / 1.3,
         )

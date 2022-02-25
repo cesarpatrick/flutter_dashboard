@@ -60,6 +60,11 @@ class _TruckRunStatusCardGridViewState
   final TruckRunService api = TruckRunService();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Future<List<TruckRunStatus>> runs = api.getTruckRunStatus();
     return FutureBuilder<List<TruckRunStatus>>(

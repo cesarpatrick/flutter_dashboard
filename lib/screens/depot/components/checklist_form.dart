@@ -80,6 +80,8 @@ class _CheckListFormState extends State<CheckListForm> {
                             departament: form.departament,
                             template: Template.fromJson(
                                 json.decode(jsonEncode(data)))));
+
+                        Navigator.pushNamed(context, '/depot');
                       },
                       buttonSave: Container(
                         height: 40.0,
