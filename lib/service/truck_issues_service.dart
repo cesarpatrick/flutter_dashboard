@@ -196,11 +196,6 @@ class TruckIssuesService {
         '/' +
         id));
 
-    print(Variables.getTruckIssuesRCAListUrl() +
-        authKeyService.getAuthKey() +
-        '/' +
-        id);
-
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
