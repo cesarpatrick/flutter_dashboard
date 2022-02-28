@@ -33,8 +33,10 @@ const String TRUCK_ISSUES_RCA_LIST_ENDPOINT =
 const String LOGIN_ROUTE = "/";
 const String DASHBOARD_ROUTE = "/dashboard";
 const String INVENTORY_ROUTE = "/inventory";
+
 const String DEPOT_ROUTE = "/depot";
-const String DEPOT_CHECKLIST_ROUTE = "/checklist";
+const String DEPOT_CHECKLIST_ROUTE = DEPOT_ROUTE + "/checklist";
+const String DEPOT_REPORTS_ROUTE = DEPOT_ROUTE + "/reports";
 
 //QUESTION TYPES
 const String INPUT_TEXT = "Input";
@@ -43,3 +45,10 @@ const String CHECKBOX_INPUT = "Checkbox";
 const String SELECT_INPUT = "Select";
 const String TEXT_AREA_INPUT = "TextArea";
 const String RADIO_BUTTON_INPUT = "RadioButton";
+
+//DEPARTAMENTS
+const String IT = "INFORMATION TECHNOLOGY";
+const String HR = "HUMAN RESOURCES";
+const String WORKSHOP = "WORKSHOP";
+const String OPERATIONS = "OPERATIONS";
+const String DEPOT = "DEPOT";

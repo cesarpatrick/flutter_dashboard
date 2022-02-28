@@ -1,3 +1,4 @@
+import 'package:admin/constants.dart';
 import 'package:admin/models/WebUser.dart';
 import 'package:admin/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Calendar",
-            svgSrc: "assets/icons/calendar_icon.svg",
+            svgSrc: "assets/icons/calendar.svg",
             press: () {
               Navigator.pushNamed(context, '/inventory');
             },
@@ -50,6 +51,13 @@ class SideMenu extends StatelessWidget {
             title: "Truck History",
             svgSrc: "assets/icons/menu_setting.svg",
             press: () {},
+          ),
+          DrawerListTile(
+            title: "Reports",
+            svgSrc: "assets/icons/menu_doc.svg",
+            press: () {
+              Navigator.pushNamed(context, DEPOT_REPORTS_ROUTE);
+            },
           ),
           DrawerListTile(
             title: "Sign Out",

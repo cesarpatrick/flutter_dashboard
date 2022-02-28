@@ -9,34 +9,31 @@ class DepotCheckListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
         child: Column(
-          children: [
-            Header(
+      children: [
+        Padding(
+            padding: EdgeInsets.all(20),
+            child: Header(
               title: "Depot Checklist",
+            )),
+        SizedBox(height: defaultPadding),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 5,
+              child: Column(
+                children: [
+                  CheckListForm(),
+                  if (Responsive.isMobile(context))
+                    SizedBox(height: defaultPadding),
+                ],
+              ),
             ),
-            SizedBox(height: defaultPadding),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    children: [
-                      CheckListForm(),
-                      if (Responsive.isMobile(context))
-                        SizedBox(height: defaultPadding),
-                    ],
-                  ),
-                ),
-                if (!Responsive.isMobile(context))
-                  SizedBox(width: defaultPadding),
-              ],
-            )
+            if (!Responsive.isMobile(context)) SizedBox(width: defaultPadding),
           ],
-        ),
-      ),
-    );
+        )
+      ],
+    ));
   }
 }

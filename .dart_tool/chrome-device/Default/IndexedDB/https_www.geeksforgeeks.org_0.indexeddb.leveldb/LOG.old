@@ -1,3 +1,7 @@
-2022/02/21-15:51:53.392 11f8be Reusing MANIFEST /tmp/flutter_tools.QSWCGD/flutter_tools_chrome_device.PATWFC/Default/IndexedDB/https_www.geeksforgeeks.org_0.indexeddb.leveldb/MANIFEST-000001
-2022/02/21-15:51:53.392 11f8be Recovering log #3
-2022/02/21-15:51:53.392 11f8be Reusing old log /tmp/flutter_tools.QSWCGD/flutter_tools_chrome_device.PATWFC/Default/IndexedDB/https_www.geeksforgeeks.org_0.indexeddb.leveldb/000003.log 
+2022/02/22-09:08:59.879 13a3d1 Reusing MANIFEST /tmp/flutter_tools.QSWCGD/flutter_tools_chrome_device.PATWFC/Default/IndexedDB/https_www.geeksforgeeks.org_0.indexeddb.leveldb/MANIFEST-000001
+2022/02/22-09:08:59.879 13a3d1 Recovering log #3
+2022/02/22-09:08:59.879 13a3d1 Reusing old log /tmp/flutter_tools.QSWCGD/flutter_tools_chrome_device.PATWFC/Default/IndexedDB/https_www.geeksforgeeks.org_0.indexeddb.leveldb/000003.log 
+2022/02/22-09:09:02.784 13a3d1 Level-0 table #5: started
+2022/02/22-09:09:02.787 13a3d1 Level-0 table #5: 357 bytes OK
+2022/02/22-09:09:02.794 13a3d1 Delete type=0 #3
+2022/02/22-09:09:02.794 13a3d1 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

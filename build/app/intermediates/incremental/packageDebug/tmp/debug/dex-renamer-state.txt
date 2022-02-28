@@ -1,0 +1,4 @@
+#Mon Feb 28 15:10:07 NZDT 2022
+base.0=/home/cesar/Flutter/RDLWorkshopPortal/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

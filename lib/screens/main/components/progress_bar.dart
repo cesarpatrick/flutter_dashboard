@@ -26,20 +26,21 @@ class _ProgressBarState extends State<ProgressBar>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(defaultPadding),
-        decoration: BoxDecoration(color: bgColor),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(
-                    color: Colors.blue,
-                    value: controller.value,
-                  ))
-            ]));
+    return SizedBox();
+    // return Container(
+    //     padding: EdgeInsets.all(defaultPadding),
+    //     decoration: BoxDecoration(color: bgColor),
+    //     child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.center,
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         children: [
+    //           SizedBox(
+    //               width: 50,
+    //               height: 50,
+    //               child: CircularProgressIndicator(
+    //                 color: Colors.blue,
+    //                 value: controller.value,
+    //               ))
+    //         ]));
   }
 }

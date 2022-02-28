@@ -32,73 +32,70 @@ class _DepotNotesState extends State<DepotNotes> {
     Size _screen = MediaQuery.of(context).size;
 
     return Container(
-        width: _screen.width / 2.5,
+        width: _screen.width,
         height: _screen.height / 1.5,
         padding: EdgeInsets.all(defaultPadding),
         decoration: BoxDecoration(
           color: secondaryColor,
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
-        child: SingleChildScrollView(
-            controller: scrollController,
-            padding: EdgeInsets.all(defaultPadding),
-            child: Column(children: [
-              new Center(
-                child: HtmlEditor(
-                    controller: controller,
-                    htmlToolbarOptions: HtmlToolbarOptions(
-                        toolbarItemHeight: 0,
-                        defaultToolbarButtons: [
-                          StyleButtons(style: false),
-                          FontSettingButtons(
-                              fontSizeUnit: false,
-                              fontName: false,
-                              fontSize: false),
-                          FontButtons(
-                              clearAll: false,
-                              bold: false,
-                              italic: false,
-                              strikethrough: false,
-                              subscript: false,
-                              superscript: false,
-                              underline: false),
-                          ColorButtons(
-                              foregroundColor: false, highlightColor: false),
-                          ListButtons(listStyles: false, ol: false, ul: false),
-                          ParagraphButtons(
-                              alignCenter: false,
-                              alignJustify: false,
-                              alignLeft: false,
-                              alignRight: false,
-                              decreaseIndent: false,
-                              increaseIndent: false,
-                              textDirection: false,
-                              lineHeight: false,
-                              caseConverter: false),
-                          InsertButtons(
-                              link: false,
-                              picture: false,
-                              video: false,
-                              audio: false,
-                              table: false,
-                              hr: false,
-                              otherFile: false),
-                        ]),
-                    htmlEditorOptions: HtmlEditorOptions(
-                      characterLimit: 0,
-                      initialText: notesHtml,
-                      darkMode: false,
-                    ),
-                    otherOptions: OtherOptions(
-                      height: _screen.height / 1.3,
-                    )),
+        child: Column(children: [
+          new Center(
+            child: HtmlEditor(
+                controller: controller,
+                htmlToolbarOptions: HtmlToolbarOptions(
+                    toolbarItemHeight: 0,
+                    defaultToolbarButtons: [
+                      StyleButtons(style: false),
+                      FontSettingButtons(
+                          fontSizeUnit: false,
+                          fontName: false,
+                          fontSize: false),
+                      FontButtons(
+                          clearAll: false,
+                          bold: false,
+                          italic: false,
+                          strikethrough: false,
+                          subscript: false,
+                          superscript: false,
+                          underline: false),
+                      ColorButtons(
+                          foregroundColor: false, highlightColor: false),
+                      ListButtons(listStyles: false, ol: false, ul: false),
+                      ParagraphButtons(
+                          alignCenter: false,
+                          alignJustify: false,
+                          alignLeft: false,
+                          alignRight: false,
+                          decreaseIndent: false,
+                          increaseIndent: false,
+                          textDirection: false,
+                          lineHeight: false,
+                          caseConverter: false),
+                      InsertButtons(
+                          link: false,
+                          picture: false,
+                          video: false,
+                          audio: false,
+                          table: false,
+                          hr: false,
+                          otherFile: false),
+                    ]),
+                htmlEditorOptions: HtmlEditorOptions(
+                  characterLimit: 0,
+                  initialText: notesHtml,
+                  darkMode: false,
+                ),
+                otherOptions: OtherOptions(
+                  height: _screen.height / 1.8,
+                )),
 
-                // Html(
-                //   defaultTextStyle: TextStyle(color: Colors.white),
-                //   data: notesHtml,
-                //   padding: EdgeInsets.all(8.0),
-                // ),
-              ),
-            ])));
+            // Html(
+            //   defaultTextStyle: TextStyle(color: Colors.white),
+            //   data: notesHtml,
+            //   padding: EdgeInsets.all(8.0),
+            // ),
+          ),
+        ]));
   }
 }

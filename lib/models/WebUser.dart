@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'Variables.dart';
 
 Future<Webuser> authenticate(String userName, String password) async {
+  print(Uri.parse(Variables.getAuthUrl() + "/up"));
   final response = await http.post(Uri.parse(Variables.getAuthUrl() + "/up"),
       body: {
         "username": userName,

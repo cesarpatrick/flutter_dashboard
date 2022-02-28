@@ -15,8 +15,8 @@ class _DepotRosterState extends State<DepotRoster> {
     Size _screen = MediaQuery.of(context).size;
 
     return Container(
-        width: _screen.width / 2.5,
-        height: _screen.height / 1.5,
+        width: _screen.width,
+        height: _screen.height / 2.5,
         decoration: BoxDecoration(
           color: secondaryColor,
           borderRadius: const BorderRadius.all(Radius.circular(10)),

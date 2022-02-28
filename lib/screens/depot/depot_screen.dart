@@ -30,7 +30,7 @@ class DepotScreen extends StatelessWidget {
                       SizedBox(height: defaultPadding),
                       TruckRunStatusScreen(),
                       SizedBox(height: defaultPadding),
-                      TrucksLocation(),
+                      // TrucksLocation(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                     ],

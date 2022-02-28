@@ -1,6 +1,6 @@
 class Variables {
   static String prod() {
-    return 'https://rdltr.com:8999/RDLWebService/ws/';
+    return 'https://rdltr.com:8999/rdl-report-ws/ws/';
   }
 
   static String beta() {

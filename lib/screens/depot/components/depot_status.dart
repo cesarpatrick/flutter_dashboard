@@ -37,47 +37,64 @@ class _DepotStatusState extends State<DepotStatus> {
               },
               icon: Icon(Icons.checklist),
               label: Text("Checklist"),
+            ),
+            SizedBox(width: 20),
+            ElevatedButton.icon(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(
+                  horizontal: defaultPadding * 1.5,
+                  vertical:
+                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, DEPOT_REPORTS_ROUTE);
+              },
+              icon: Icon(Icons.bar_chart_sharp),
+              label: Text("Reports"),
             )
           ],
         ),
-        Row(
+        SizedBox(
+          height: 20,
+        ),
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(children: [
+              Text(
+                "Notes",
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              new IconButton(
+                color: Colors.blueAccent,
+                icon: new Icon(Icons.create),
+                highlightColor: Colors.pink,
+                iconSize: 16,
+                onPressed: () {
+                  setState(() {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return NotesEditorModal();
+                        });
+                  });
+                },
+              ),
+            ]),
+            DepotNotes()
+          ],
+        ),
+        SizedBox(height: defaultPadding),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Roster",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            Row(
-              children: [
-                Text(
-                  "Notes",
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                new IconButton(
-                  color: Colors.blueAccent,
-                  icon: new Icon(Icons.create),
-                  highlightColor: Colors.pink,
-                  iconSize: 16,
-                  onPressed: () {
-                    setState(() {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return NotesEditorModal();
-                          });
-                    });
-                  },
-                ),
-              ],
-            ),
+            DepotRoster(),
           ],
-        ),
-        SizedBox(height: defaultPadding),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [DepotRoster(), DepotNotes()],
         ),
       ],
     );

@@ -2,7 +2,9 @@ import 'package:admin/constants.dart';
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/page_not_found_screen.dart';
 import 'package:admin/screens/auth/auth.dart';
+import 'package:admin/screens/depot/depot_reports_screen.dart';
 import 'package:admin/screens/main/main_dashboard_screen.dart';
+import 'package:admin/screens/main/main_depot_reports_screen.dart';
 import 'package:admin/screens/main/main_depot_screen.dart';
 import 'package:admin/screens/main/main_inventory_screen.dart';
 import 'package:admin/service/auth_key_service.dart';
@@ -76,6 +78,14 @@ class MyApp extends StatelessWidget {
                   ),
                 ],
                 child: MainDepotCheckListScreen(),
+              ),
+          DEPOT_REPORTS_ROUTE: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (context) => MenuController(),
+                  ),
+                ],
+                child: MainDepotReportsScreen(),
               ),
         });
   }
