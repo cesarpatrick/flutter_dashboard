@@ -33,4 +33,30 @@ class FormRecordsService {
       throw Exception('Failed to load the form record');
     }
   }
+
+  Future<List<FormRecords>> getFormRecordsByFilter(
+      FormRecords formRecord) async {
+    final response = await http.post(
+        Uri.parse(Variables.getFormRecordsByFilterUrl() +
+            authKeyService.getAuthKey()),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(formRecord));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+
+      return parsed
+          .map<FormRecords>((json) => FormRecords.fromJson(json))
+          .toList();
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load the form records');
+    }
+  }
 }

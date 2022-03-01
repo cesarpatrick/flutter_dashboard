@@ -15,19 +15,25 @@ class FormRecords {
       this.departament,
       this.dateUpdated,
       this.dateCreated,
-      this.template});
+      this.template,
+      this.jsonFile,
+      this.userCreated});
 
   int? id;
   String? departament;
   String? dateUpdated;
   String? dateCreated;
   Template? template;
+  String? jsonFile;
+  int? userCreated;
 
   factory FormRecords.fromJson(Map<String, dynamic> json) => FormRecords(
       id: json["id"],
       departament: json["departament"],
       dateUpdated: json["dateUpdated"],
       dateCreated: json["dateCreated"],
+      jsonFile: json["jsonFile"],
+      userCreated: json["userCreated"],
       template: json["template"] == null
           ? null
           : Template.fromJson(json["template"]));
@@ -37,6 +43,8 @@ class FormRecords {
         "departament": departament,
         "dateUpdated": dateUpdated,
         "dateCreated": dateCreated,
-        "template": template!.toJson()
+        "template": template!.toJson(),
+        "jsonFile": jsonFile,
+        "userCreated": userCreated
       };
 }

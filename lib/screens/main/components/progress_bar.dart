@@ -12,17 +12,17 @@ class _ProgressBarState extends State<ProgressBar>
     with TickerProviderStateMixin {
   late AnimationController controller;
 
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-    )..addListener(() {
-        //  setState(() {});
-      });
-    controller.repeat(reverse: false);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   controller = AnimationController(
+  //     vsync: this,
+  //     duration: const Duration(seconds: 3),
+  //   )..addListener(() {
+  //       //  setState(() {});
+  //     });
+  //   controller.repeat(reverse: false);
+  // }
 
   @override
   Widget build(BuildContext context) {

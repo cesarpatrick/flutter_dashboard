@@ -143,8 +143,8 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 30,
-                width: 30,
+                height: 23,
+                width: 23,
                 decoration: BoxDecoration(
                   color: Colors.red,
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -152,8 +152,8 @@ DataRow recentJobsDataRow(JobInfo jobInfo, BuildContext context) {
                 child: Icon(Icons.car_repair, color: Colors.black),
               ),
               SizedBox(
-                width: 10,
-                height: 10,
+                width: 5,
+                height: 5,
               ),
               FutureBuilder<Truck>(
                   future: truck,
