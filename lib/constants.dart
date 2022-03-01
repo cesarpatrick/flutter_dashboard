@@ -35,6 +35,7 @@ const String DASHBOARD_ROUTE = "/dashboard";
 const String INVENTORY_ROUTE = "/inventory";
 
 const String DEPOT_ROUTE = "/depot";
+const String DEPOT_TV_ROUTE = "/depot/tv";
 const String DEPOT_CHECKLIST_ROUTE = DEPOT_ROUTE + "/checklist";
 const String DEPOT_REPORTS_ROUTE = DEPOT_ROUTE + "/reports";
 

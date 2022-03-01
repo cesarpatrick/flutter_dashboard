@@ -95,7 +95,7 @@ class _TruckRunStatusCardGridViewState
     List runStatusInfo = [];
 
     for (TruckRunStatus status in listRunStatus!) {
-      if (status.runName!.startsWith('Glass') && status.count! > 0) {
+      if (status.runName!.startsWith('G') && status.count! > 0) {
         runStatusInfo.add(TruckRunStatusInfo(
             runName: status.runName,
             color: Colors.blue,
@@ -106,7 +106,7 @@ class _TruckRunStatusCardGridViewState
             icon: Icon(Icons.wine_bar, color: Colors.blue)));
       }
 
-      if (status.runName!.startsWith('Rubbish')) {
+      if (status.runName!.startsWith('R')) {
         runStatusInfo.add(TruckRunStatusInfo(
             runName: status.runName,
             color: Colors.yellow,
@@ -115,17 +115,6 @@ class _TruckRunStatusCardGridViewState
             stops: status.stops,
             count: status.count,
             icon: Icon(Icons.cached, color: Colors.yellow)));
-      }
-
-      if (status.runName!.startsWith('Depot')) {
-        runStatusInfo.add(TruckRunStatusInfo(
-            runName: status.runName,
-            color: Colors.red,
-            truckRego: status.driverAndTruck,
-            userName: status.wu == null ? '' : status.wu!.userName!,
-            stops: status.stops,
-            count: status.count,
-            icon: Icon(Icons.home, color: Colors.red)));
       }
     }
     return runStatusInfo;
