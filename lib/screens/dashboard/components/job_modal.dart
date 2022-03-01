@@ -27,13 +27,16 @@ class _JobModalState extends State<JobModal> {
 
   @override
   Widget build(BuildContext context) {
+    Size screen = MediaQuery.of(context).size;
+
     return Dialog(
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Container(
-        constraints: BoxConstraints(maxHeight: 650, maxWidth: 600),
+        constraints: BoxConstraints(
+            maxHeight: screen.height / 1.4, maxWidth: screen.width / 1.5),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(50.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -134,8 +137,8 @@ class _JobModalState extends State<JobModal> {
                           ),
                           SizedBox(height: 20, width: 80),
                           SizedBox(
-                              height: 100,
-                              width: 450,
+                              height: screen.height / 12,
+                              width: screen.width / 2.6,
                               child: TextField(
                                 controller: TextEditingController()
                                   ..text = widget.jobInfo.message!,
@@ -280,8 +283,8 @@ class _JobModalState extends State<JobModal> {
                           ),
                           SizedBox(height: 20, width: 20),
                           SizedBox(
-                              height: 100,
-                              width: 450,
+                              height: screen.height / 12,
+                              width: screen.width / 2.6,
                               child: TextField(
                                 controller: TextEditingController()
                                   ..text = widget.jobInfo.note!,

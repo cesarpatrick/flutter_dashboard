@@ -50,9 +50,25 @@ class _DepotStatusState extends State<DepotStatus> {
               onPressed: () {
                 Navigator.pushNamed(context, DEPOT_REPORTS_ROUTE);
               },
-              icon: Icon(Icons.bar_chart_sharp),
-              label: Text("Reports"),
-            )
+              icon: Icon(Icons.search),
+              label: Text("Records"),
+            ),
+            SizedBox(width: 20),
+            if (!Responsive.isMobile(context))
+              ElevatedButton.icon(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: defaultPadding * 1.5,
+                    vertical:
+                        defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, DEPOT_TV_ROUTE);
+                },
+                icon: Icon(Icons.aspect_ratio_rounded),
+                label: Text("TV Mode"),
+              )
           ],
         ),
         SizedBox(
@@ -82,7 +98,9 @@ class _DepotStatusState extends State<DepotStatus> {
                 },
               ),
             ]),
-            DepotNotes()
+            DepotNotes(
+              isTvScreen: false,
+            )
           ],
         ),
         SizedBox(height: defaultPadding),

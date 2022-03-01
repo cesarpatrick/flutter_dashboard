@@ -75,6 +75,10 @@ class Variables {
     return baseUrl() + 'formRecords/save/';
   }
 
+  static String getFormRecordsByFilterUrl() {
+    return baseUrl() + 'formRecords/filter/';
+  }
+
   //Run Status Urls
 
   static String getRunStatusUrl() {

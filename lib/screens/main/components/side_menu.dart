@@ -1,4 +1,3 @@
-import 'package:admin/constants.dart';
 import 'package:admin/models/WebUser.dart';
 import 'package:admin/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +15,7 @@ class SideMenu extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
-          ),
+          DrawerHeader(child: Image.asset("assets/images/logo.png")),
           DrawerListTile(
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashbord.svg",
@@ -34,29 +31,29 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Depot",
-            svgSrc: "assets/icons/recycling_icon.svg",
-            press: () {
-              Navigator.pushNamed(context, '/depot');
-            },
-          ),
-          DrawerListTile(
             title: "Inventory",
             svgSrc: "assets/icons/menu_store.svg",
             press: () {
               Navigator.pushNamed(context, '/inventory');
             },
           ),
+          // DrawerListTile(
+          //   title: "Truck History",
+          //   svgSrc: "assets/icons/menu_setting.svg",
+          //   press: () {},
+          // ),
+          // DrawerListTile(
+          //   title: "Reports",
+          //   svgSrc: "assets/icons/menu_doc.svg",
+          //   press: () {
+          //     Navigator.pushNamed(context, DEPOT_REPORTS_ROUTE);
+          //   },
+          // ),
           DrawerListTile(
-            title: "Truck History",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Reports",
-            svgSrc: "assets/icons/menu_doc.svg",
+            title: "Depot",
+            svgSrc: "assets/icons/recycling_icon.svg",
             press: () {
-              Navigator.pushNamed(context, DEPOT_REPORTS_ROUTE);
+              Navigator.pushNamed(context, '/depot');
             },
           ),
           DrawerListTile(

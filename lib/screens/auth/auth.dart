@@ -72,7 +72,7 @@ class _AuthState extends State<Auth> {
                           )),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset('images/logo.png'),
+                        child: Image.asset('assets/images/logo.png'),
                       ),
                       Variables.baseUrl() == Variables.beta()
                           ? Text(

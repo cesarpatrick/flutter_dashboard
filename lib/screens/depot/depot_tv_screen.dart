@@ -3,10 +3,10 @@ import 'package:admin/screens/main/components/header.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import 'components/depot_status.dart';
+import 'components/depot_tv_status.dart';
 import 'components/truck_run_status.dart';
 
-class DepotScreen extends StatelessWidget {
+class DepotTvScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +25,7 @@ class DepotScreen extends StatelessWidget {
                   flex: 6,
                   child: Column(
                     children: [
-                      DepotStatus(),
+                      DepotTvStatus(),
                       SizedBox(height: defaultPadding),
                       TruckRunStatusScreen(),
                       SizedBox(height: defaultPadding),
