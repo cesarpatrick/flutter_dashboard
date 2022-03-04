@@ -48,7 +48,7 @@ class _DepotStatusState extends State<DepotStatus> {
                 ),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, DEPOT_REPORTS_ROUTE);
+                Navigator.pushNamed(context, CHECKLIST_RECORD_ROUTE);
               },
               icon: Icon(Icons.search),
               label: Text("Records"),

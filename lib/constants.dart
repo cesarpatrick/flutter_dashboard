@@ -37,7 +37,10 @@ const String INVENTORY_ROUTE = "/inventory";
 const String DEPOT_ROUTE = "/depot";
 const String DEPOT_TV_ROUTE = "/depot/tv";
 const String DEPOT_CHECKLIST_ROUTE = DEPOT_ROUTE + "/checklist";
-const String DEPOT_REPORTS_ROUTE = DEPOT_ROUTE + "/reports";
+const String CHECKLIST_RECORD_ROUTE = "/checklist/record";
+
+//REPORTS
+const String REPORTS_ROUTE = "/reports";
 
 //QUESTION TYPES
 const String INPUT_TEXT = "Input";

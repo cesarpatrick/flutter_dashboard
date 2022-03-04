@@ -47,7 +47,7 @@ class _SimpleSwitch extends State<SimpleSwitch> {
   Widget build(BuildContext context) {
     bool switchValue = false;
 
-    if (item['value'] == "true") {
+    if (item['value'] == true || item['value'] == "true") {
       switchValue = true;
     }
 

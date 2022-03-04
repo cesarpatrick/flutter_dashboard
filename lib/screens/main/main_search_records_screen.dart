@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'components/side_menu.dart';
 
-class MainDepotReportsScreen extends StatelessWidget {
+class MainSerachRecordsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserService userService = UserService();
@@ -30,7 +30,7 @@ class MainDepotReportsScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: DepotReportScreen(),
+              child: SearchRecordScreen(),
             ),
           ],
         ),

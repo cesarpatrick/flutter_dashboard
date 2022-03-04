@@ -73,6 +73,7 @@ class _TruckRunStatusCardGridViewState
           if (snapshot.hasData) {
             List list = _getRunStatusInfoList(snapshot.data);
             return GridView.builder(
+              controller: ScrollController(),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: list.length,

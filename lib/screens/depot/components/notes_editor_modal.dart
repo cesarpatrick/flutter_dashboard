@@ -20,7 +20,20 @@ class _NotesEditorModalState extends State<NotesEditorModal> {
 
   String notes = "";
   void save() {
-    api.save(DepotDashboard(id: 1, notes: notes));
+    setState(() {
+      api.save(DepotDashboard(id: 1, notes: notes));
+      final snackBar = SnackBar(
+        content: Text(
+          'Notes was successfully saved.',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
   }
 
   @override

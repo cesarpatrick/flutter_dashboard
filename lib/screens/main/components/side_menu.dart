@@ -1,3 +1,4 @@
+import 'package:admin/constants.dart';
 import 'package:admin/models/WebUser.dart';
 import 'package:admin/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -42,18 +43,19 @@ class SideMenu extends StatelessWidget {
           //   svgSrc: "assets/icons/menu_setting.svg",
           //   press: () {},
           // ),
-          // DrawerListTile(
-          //   title: "Reports",
-          //   svgSrc: "assets/icons/menu_doc.svg",
-          //   press: () {
-          //     Navigator.pushNamed(context, DEPOT_REPORTS_ROUTE);
-          //   },
-          // ),
+
           DrawerListTile(
             title: "Depot",
             svgSrc: "assets/icons/recycling_icon.svg",
             press: () {
               Navigator.pushNamed(context, '/depot');
+            },
+          ),
+          DrawerListTile(
+            title: "Reports",
+            svgSrc: "assets/icons/menu_doc.svg",
+            press: () {
+              Navigator.pushNamed(context, REPORTS_ROUTE);
             },
           ),
           DrawerListTile(

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'components/search_records.dart';
 
-class DepotReportScreen extends StatelessWidget {
+class SearchRecordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

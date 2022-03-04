@@ -82,6 +82,14 @@ class _CheckListFormState extends State<CheckListForm> {
                                 json.decode(jsonEncode(data)))));
 
                         Navigator.pushNamed(context, '/depot');
+                        final snackBar = SnackBar(
+                          content: Text(
+                              'Form ' + form.name + ' was successfully saved.',
+                              style: TextStyle(color: Colors.white)),
+                          backgroundColor: Colors.green,
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       buttonSave: Container(
                         height: 40.0,

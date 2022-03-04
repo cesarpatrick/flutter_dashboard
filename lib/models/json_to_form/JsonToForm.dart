@@ -189,7 +189,6 @@ class _CoreFormState extends State<JsonToForm> {
 
       switch (template.questions[position].field!.type) {
         case SWITCH:
-          formGeneral['fields'][position]['value'] = value;
           template.questions[position].field!.value = value;
           break;
         case CHECKBOX_INPUT:

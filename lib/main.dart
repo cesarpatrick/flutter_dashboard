@@ -3,7 +3,8 @@ import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/page_not_found_screen.dart';
 import 'package:admin/screens/auth/auth.dart';
 import 'package:admin/screens/main/main_dashboard_screen.dart';
-import 'package:admin/screens/main/main_depot_reports_screen.dart';
+import 'package:admin/screens/main/main_reports_screen.dart';
+import 'package:admin/screens/main/main_search_records_screen.dart';
 import 'package:admin/screens/main/main_depot_screen.dart';
 import 'package:admin/screens/main/main_depot_tv_screen.dart';
 import 'package:admin/screens/main/main_inventory_screen.dart';
@@ -87,13 +88,21 @@ class MyApp extends StatelessWidget {
                 ],
                 child: MainDepotCheckListScreen(),
               ),
-          DEPOT_REPORTS_ROUTE: (context) => MultiProvider(
+          CHECKLIST_RECORD_ROUTE: (context) => MultiProvider(
                 providers: [
                   ChangeNotifierProvider(
                     create: (context) => MenuController(),
                   ),
                 ],
-                child: MainDepotReportsScreen(),
+                child: MainSerachRecordsScreen(),
+              ),
+          REPORTS_ROUTE: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (context) => MenuController(),
+                  ),
+                ],
+                child: MainReportScreen(),
               ),
         });
   }
