@@ -25,18 +25,20 @@ class WorkshopStatusWidget extends StatelessWidget {
               "Workshop Status",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            // ElevatedButton.icon(
-            //   style: TextButton.styleFrom(
-            //     padding: EdgeInsets.symmetric(
-            //       horizontal: defaultPadding * 1.5,
-            //       vertical:
-            //           defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-            //     ),
-            //   ),
-            //   onPressed: () {},
-            //   icon: Icon(Icons.search),
-            //   label: Text("Truck History"),
-            // ),
+            ElevatedButton.icon(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(
+                  horizontal: defaultPadding * 1.5,
+                  vertical:
+                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, WORKSHOP_SERVICE_FORMS);
+              },
+              icon: Icon(Icons.library_books),
+              label: Text("Service Forms"),
+            ),
           ],
         ),
         SizedBox(height: defaultPadding),

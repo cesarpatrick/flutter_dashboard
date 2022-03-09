@@ -192,8 +192,8 @@ class _CoreFormState extends State<JsonToForm> {
           template.questions[position].field!.value = value;
           break;
         case CHECKBOX_INPUT:
-          template.questions[position].field!.items![position - 1].value =
-              value;
+          if (position >= 2) position = 1;
+          template.questions[position].field!.items![position].value = value;
           break;
         case RADIO_BUTTON_INPUT:
           template.questions[position].field!.value = value;
@@ -205,6 +205,9 @@ class _CoreFormState extends State<JsonToForm> {
           template.questions[position].field!.value = value;
           break;
         case TEXT_AREA_INPUT:
+          template.questions[position].field!.value = value;
+          break;
+        case INPUT_DATE:
           template.questions[position].field!.value = value;
           break;
         default:

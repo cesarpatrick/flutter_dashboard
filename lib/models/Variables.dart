@@ -69,6 +69,9 @@ class Variables {
     return baseUrl() + 'formTemplate/filter/';
   }
 
+  static String getTemplateUrl() {
+    return baseUrl() + 'formTemplate/';
+  }
   //Form Record Urls
 
   static String getFormRecordSaveUrl() {

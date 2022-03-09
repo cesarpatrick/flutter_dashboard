@@ -48,4 +48,24 @@ class TemplateService {
       throw Exception('Failed to load the templates');
     }
   }
+
+  Future<Template> getTemplateById(int id) async {
+    final response = await http.post(Uri.parse(Variables.getTemplateUrl() +
+        id.toString() +
+        "/" +
+        authKeyService.getAuthKey()));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      final responseJson = json.decode(response.body);
+
+      return Template.fromJson(responseJson);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load the template');
+    }
+  }
 }

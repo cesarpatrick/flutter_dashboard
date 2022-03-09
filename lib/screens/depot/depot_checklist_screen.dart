@@ -24,7 +24,7 @@ class DepotCheckListScreen extends StatelessWidget {
               flex: 5,
               child: Column(
                 children: [
-                  CheckListForm(),
+                  DepotCheckListForm(),
                   if (Responsive.isMobile(context))
                     SizedBox(height: defaultPadding),
                 ],

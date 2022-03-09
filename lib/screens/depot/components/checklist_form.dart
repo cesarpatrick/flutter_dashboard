@@ -9,14 +9,14 @@ import 'package:admin/service/form_records_service.dart';
 import 'package:admin/service/template_service.dart';
 import 'package:flutter/material.dart';
 
-class CheckListForm extends StatefulWidget {
-  const CheckListForm({Key? key}) : super(key: key);
+class DepotCheckListForm extends StatefulWidget {
+  const DepotCheckListForm({Key? key}) : super(key: key);
 
   @override
-  _CheckListFormState createState() => _CheckListFormState();
+  _DepotCheckListFormState createState() => _DepotCheckListFormState();
 }
 
-class _CheckListFormState extends State<CheckListForm> {
+class _DepotCheckListFormState extends State<DepotCheckListForm> {
   TemplateService templateService = new TemplateService();
   FormRecordsService formRecordsService = new FormRecordsService();
 

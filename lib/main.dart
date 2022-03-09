@@ -8,6 +8,7 @@ import 'package:admin/screens/main/main_search_records_screen.dart';
 import 'package:admin/screens/main/main_depot_screen.dart';
 import 'package:admin/screens/main/main_depot_tv_screen.dart';
 import 'package:admin/screens/main/main_inventory_screen.dart';
+import 'package:admin/screens/main/main_workshop_form_screen.dart';
 import 'package:admin/service/auth_key_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -94,7 +95,7 @@ class MyApp extends StatelessWidget {
                     create: (context) => MenuController(),
                   ),
                 ],
-                child: MainSerachRecordsScreen(),
+                child: MainSearchRecordsScreen(),
               ),
           REPORTS_ROUTE: (context) => MultiProvider(
                 providers: [
@@ -103,6 +104,14 @@ class MyApp extends StatelessWidget {
                   ),
                 ],
                 child: MainReportScreen(),
+              ),
+          WORKSHOP_SERVICE_FORMS: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (context) => MenuController(),
+                  ),
+                ],
+                child: MainWorkshopFormScreen(),
               ),
         });
   }

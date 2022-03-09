@@ -1,13 +1,13 @@
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/responsive.dart';
-import 'package:admin/screens/depot/search_records_screen.dart';
+import 'package:admin/screens/workshop_form/workshop_form_screen.dart';
 import 'package:admin/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'components/side_menu.dart';
 
-class MainSearchRecordsScreen extends StatelessWidget {
+class MainWorkshopFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserService userService = UserService();
@@ -30,7 +30,7 @@ class MainSearchRecordsScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: SearchRecordScreen(),
+              child: WorkshopFormScreen(),
             ),
           ],
         ),

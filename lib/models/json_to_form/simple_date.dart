@@ -28,6 +28,8 @@ class SimpleDate extends StatefulWidget {
 class _SimpleDate extends State<SimpleDate> {
   dynamic item;
 
+  TextEditingController dateController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -39,10 +41,11 @@ class _SimpleDate extends State<SimpleDate> {
     Widget label = SizedBox.shrink();
     if (Fun.labelHidden(item)) {
       label = new Container(
-        child: new Text(
-          item['label'],
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-        ),
+        child: new Text(item['label'],
+            style: new TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: Colors.black)),
       );
     }
     return new Container(
@@ -59,16 +62,32 @@ class _SimpleDate extends State<SimpleDate> {
                   //   selectDate();
                   // },
                   child: new TextFormField(
+                controller: dateController,
+                style: TextStyle(color: Colors.black),
                 readOnly: true,
+                cursorColor: Colors.black,
                 decoration: InputDecoration(
-                  //border: OutlineInputBorder(),
+                  fillColor: Colors.black,
+                  focusColor: Colors.black,
+                  hoverColor: Colors.black,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
+                  ),
+                  border: OutlineInputBorder(),
                   hintText: item['value'] ?? "",
+                  iconColor: Colors.black,
                   //prefixIcon: Icon(Icons.date_range_rounded),
                   suffixIcon: IconButton(
                     onPressed: () {
-                      selectDate();
+                      setState(() {
+                        selectDate();
+                      });
                     },
                     icon: Icon(Icons.calendar_today_rounded),
+                    color: Colors.black,
                   ),
                 ),
               )),
@@ -82,14 +101,15 @@ class _SimpleDate extends State<SimpleDate> {
   Future selectDate() async {
     DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: new DateTime.now().subtract(new Duration(days: 360)),
-        firstDate: new DateTime.now().subtract(new Duration(days: 360)),
-        lastDate: new DateTime.now().add(new Duration(days: 360)));
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime.now(),
+        lastDate: new DateTime.now().add(new Duration(days: 720)));
     if (picked != null) {
       String date =
-          "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+          "${picked.day.toString().padLeft(2, '0')}-${picked.month.toString().padLeft(2, '0')}-${picked.year.toString()}";
       this.setState(() {
         item['value'] = date;
+        dateController.text = date;
         widget.onChange!(widget.position, date);
       });
     }

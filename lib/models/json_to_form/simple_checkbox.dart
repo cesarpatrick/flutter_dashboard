@@ -75,7 +75,8 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
                 );
               },
             ),
-            new Text(item['items'][i]['label'], style: blackTextStyle),
+            new Text(item['items'][i]['label'],
+                style: TextStyle(color: Colors.black)),
           ],
         ),
       );

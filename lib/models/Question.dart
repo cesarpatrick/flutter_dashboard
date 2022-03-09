@@ -74,7 +74,7 @@ class QuestionField {
         label: json["label"] == null ? "" : json["label"],
         placeholder: json["placeholder"] == null ? null : json["placeholder"],
         required: json["required"] == null ? null : json["required"],
-        value: json["value"],
+        value: json["value"] == null ? null : json["value"],
         items: json["items"] == null
             ? []
             : List<QuestionFieldItem>.from(
